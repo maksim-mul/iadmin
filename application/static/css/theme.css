@@ -1,0 +1,54 @@
+
+/*Uikit*/
+.uk-nav-default .uk-nav-sub a:focus, .uk-nav-default .uk-nav-sub a:hover {
+    color: #fff;
+}
+
+
+
+
+
+.uk-card{
+    padding: 15px;
+}
+
+
+.card{
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.4);
+    border-radius: 5px;
+    background: #f7f7f7;
+}
+.card p{
+    font-size: 18px;
+    text-align: justify;
+    margin: 15px 0 5px 0;
+    line-height: 22px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e2e2e2;
+}
+.order-number{
+    font-size: 40px;
+    line-height: 40px;
+
+    border: 1px solid #dadada;
+    background: #efefef;
+    padding: 0px 5px;
+}
+.price{
+    font-size: 20px;
+}
+.btn-go{
+    background: #34860c;
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.btn-end{
+    background: #ab1800;
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+}
