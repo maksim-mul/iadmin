@@ -1,54 +1,67 @@
 
-/*Uikit*/
+body {
+background: #f6fafd;
+}
+
+
+
+
+
+/*Uikit==================================================================================*/
 .uk-nav-default .uk-nav-sub a:focus, .uk-nav-default .uk-nav-sub a:hover {
     color: #fff;
 }
 
 
-
-
-
-.uk-card{
-    padding: 15px;
+/*Универсальные==================================================================*/
+.h1-blc{
+margin-bottom: 20px;
+border-bottom: 2px solid #df405a;
+position: relative;
 }
 
-
-.card{
-    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.4);
-    border-radius: 5px;
-    background: #f7f7f7;
-}
-.card p{
-    font-size: 18px;
-    text-align: justify;
-    margin: 15px 0 5px 0;
-    line-height: 22px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #e2e2e2;
-}
-.order-number{
-    font-size: 40px;
-    line-height: 40px;
-
-    border: 1px solid #dadada;
-    background: #efefef;
-    padding: 0px 5px;
-}
-.price{
-    font-size: 20px;
-}
-.btn-go{
-    background: #34860c;
-    color: #fff;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 18px;
+.h1-blc:after {
+content: '';
+position: absolute;
+background: #df405a;
+width: 45px;
+height: 7px;
+bottom: -7px;
+right: 0px;
 }
 
-.btn-end{
-    background: #ab1800;
-    color: #fff;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 18px;
+.h1-blc>h1{
+font-size: 35px;
+display: inline-block;
+margin-bottom: 5px;
+}
+
+/*Разметка страниц*/
+
+/*Топ*/
+.top-panel {
+background: #f6f6f6;
+border-bottom: 1px solid #ebeaef;
+padding: 10px 0;
+}
+
+/*Панель слева*/
+.left-menu .uk-nav-default>li>a:focus, .left-menu .uk-nav-default>li>a:hover {
+color: #fff;
+}
+.left-panel {
+background: #2e2e48;
+width: 300px;
+min-height: 100%;
+}
+.left-menu{
+padding: 30px;
+}
+.logo {
+background: #2a293b;
+width: 100%;
+padding: 15px;
+box-sizing: border-box;
+font-size: 18px;
+color: #fff;
 }

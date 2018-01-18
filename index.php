@@ -1,11 +1,7 @@
 <?php
-	session_start();
-	if (isset($_SESSION['admin'])){
-		include "main/views/main.php";
-	}
-	else{
-		include "main/views/login.php";
-	}
+	include_once "application/bootstrap.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."/application/bootstrap.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."/main/index.php";
 ?>
 
 

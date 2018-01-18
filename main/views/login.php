@@ -30,8 +30,16 @@
 
 <?
 if(isset($_POST['submit_enter'])){
-  if( $_POST['login'] > 'admin' ){
-		$_SESSION['admin'] = $result[0]['login'];
+
+  echo 'yyyyyyyyyyyyyyyyyyyyy';
+
+  if( $_POST['login'] == 'admin'){
+		$_SESSION['admin'] = 'admin';
+    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0'>";
 	}
+  elseif($_POST['login'] == 'test'){
+    $_SESSION['admin'] = 'test';
+    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0'>";
+  }
 }
 ?>
