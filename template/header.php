@@ -37,7 +37,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/application/bootstrap.php";
                         <a href="#"><span class="uk-margin-small-right" uk-icon="icon: delivery"></span> Служба доставки</a>
                         <ul class="uk-nav-sub">
                             <li><a href="/delivery/expedition/"><span class="uk-margin-small-right" uk-icon="icon: social"></span> Экспедиция</a></li>
-                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: list"></span> Список складов</a></li>
+                            <li><a href="/delivery/storage/"><span class="uk-margin-small-right" uk-icon="icon: list"></span> Список складов</a></li>
                             <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Состояние авто</a></li>
                         </ul>
                     </li>

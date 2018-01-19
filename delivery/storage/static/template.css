@@ -1,0 +1,28 @@
+﻿/*Раздел доставка*/
+.card-stock{
+padding: 0px;
+}
+.card-stock>.card-stock-title{
+background: #efefef;
+padding: 5px 15px;
+border-bottom: 1px solid #e8e8e8;
+font-size: 20px;
+}
+.card-stock>div{
+  padding: 10px 15px;
+}
+.card-stock-delit{
+text-decoration: underline;
+color: #df405a;
+font-size: 14px;
+text-align: right;
+top: 18px;
+position: relative;
+}
+
+.list-add-stock{
+font-size: 14px;
+line-height: 30px;
+color: #df405a;
+text-decoration: underline;
+}

@@ -3,50 +3,6 @@ $SetTitle = "Экспедиция";
 include_once $_SERVER['DOCUMENT_ROOT']."/template/header.php";
 ?>
 
-
-<script src="http://api-maps.yandex.ru/2.1/?lang=ru-RU" type="text/javascript"></script>
-<script src="http://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
-
-<script>
-ymaps.ready(init);
-function init () {
-    var myMap = new ymaps.Map('map', {
-            center: [55.76, 37.64],
-            zoom: 10
-        }, {
-            searchControlProvider: 'yandex#search'
-        }),
-        objectManager = new ymaps.ObjectManager({
-            // Чтобы метки начали кластеризоваться, выставляем опцию.
-            clusterize: true,
-            // ObjectManager принимает те же опции, что и кластеризатор.
-            gridSize: 32,
-            clusterDisableClickZoom: true
-        });
-
-    // Чтобы задать опции одиночным объектам и кластерам,
-    // обратимся к дочерним коллекциям ObjectManager.
-    objectManager.objects.options.set('preset', 'islands#blueCircleIcon');
-    objectManager.clusters.options.set('preset', 'islands#invertedBlueClusterIcons');
-    myMap.geoObjects.add(objectManager);
-
-    $.ajax({
-        url: "data.json"
-    }).done(function(data) {
-        objectManager.add(data);
-    });
-}
-</script>
-
-
-<div width="800" height="500" id="map" style="width: 500px; height: 400px;"></div>
-
-
-
-
-
-
-
 <div class="h1-blc">
     <h1>Формирование экспедиции</h1>
 </div>

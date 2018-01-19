@@ -1,9 +1,9 @@
 <?
 class Database{
 	private $host = "localhost";
-	private $user = "cs62029_master";
-	private $pass = "374626";
-	private $db = "cs62029_master";
+	private $user = "root";
+	private $pass = "";
+	private $db = "iadmin";
 
 	//название таблицы
 	private $tablename;
@@ -14,14 +14,11 @@ class Database{
 	}
 
 	function connectToDb(){
-		if (mysql_connect($this->host, $this->user, $this->pass)){
-			if (mysql_select_db($this->db)){
-			}
-		}
+		$this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
 	}
 
 	function closeConnection(){
-		mysql_close();
+		mysqli_close($this->mysqli);
 	}
 
 	//DELETE==========================================================================================
@@ -29,23 +26,23 @@ class Database{
 	function deletData($id){
 		$id = intval($id);
 		$query = "DELETE FROM $this->tablename WHERE id=$id;";
-		if( $sql = mysql_query($query) ){
-			$data = mysql_fetch_array($sql);
+		if( $sql = mysqli_query($this->mysqli, $query) ){
+			$data = mysqli_fetch_array($sql);
 		}
 		//echo 'Удалено!';
 		$this->closeConnection();
 	}
-	
+
 	//удаление строки по параметру
 	function deleteDataWithParams($params){
-		$query = "DELETE FROM $this->tablename WHERE ";				
+		$query = "DELETE FROM $this->tablename WHERE ";
 		foreach($params as $key => $values){
 			$query.= "$key = '$values' AND ";
 		}
 		$query = substr($query, 0, -4);
-		if( $sql = mysql_query($query) ){
-			for($i = 0; $i < mysql_num_rows($sql); $i++){
-				$data[$i] = mysql_fetch_array($sql);
+		if( $sql = mysqli_query($this->mysqli, $query) ){
+			for($i = 0; $i < mysqli_num_rows($sql); $i++){
+				$data[$i] = mysqli_fetch_array($sql);
 			}
 		}
 		$this->closeConnection();
@@ -63,7 +60,7 @@ class Database{
 		}
 		$query .= "(".implode($keys, ",").") VALUES ";
 		$query .= "('".implode($values, "','")."')";
-		mysql_query($query);
+		mysqli_query($this->mysqli, $query);
 		//echo $query;
 		$this->closeConnection();
 	}
@@ -82,7 +79,7 @@ class Database{
 
 		$query = substr($query, 0, -2);
 		$query.=" WHERE  id =".$id;
-		mysql_query($query);
+		mysqli_query($this->mysqli, $query);
 		//echo $query;
 		$this->closeConnection();
 	}
@@ -91,19 +88,19 @@ class Database{
 	//вывод строки по id
 	function getDataById($id) {
 		$query = "Select * from $this->tablename where id = '$id'";
-		if( $sql = mysql_query($query) ){
-			$data = mysql_fetch_array($sql);
+		if( $sql = mysqli_query($this->mysqli, $query) ){
+			$data = mysqli_fetch_array($sql);
 		}
 		$this->closeConnection();
-		return $data;
+		return $sql;
 	}
 
 	//вывод всей таблицы
 	function getAllData() {
 		$query = "Select * from $this->tablename";
-		if( $sql = mysql_query($query) ){
-			for($i = 0; $i < mysql_num_rows($sql); $i++){
-				$data[$i] = mysql_fetch_array($sql);
+		if( $sql = mysqli_query($this->mysqli, $query) ){
+			for($i = 0; $i < mysqli_num_rows($sql); $i++){
+				$data[$i] = mysqli_fetch_array($sql);
 			}
 		}
 		$this->closeConnection();
@@ -119,9 +116,9 @@ class Database{
 		$query = substr($query, 0, -4);
 		//echo $query;
 
-		if( $sql = mysql_query($query) ){
-			for($i = 0; $i < mysql_num_rows($sql); $i++){
-				$data[$i] = mysql_fetch_array($sql);
+		if( $sql = mysqli_query($this->mysqli, $query) ){
+			for($i = 0; $i < mysqli_num_rows($sql); $i++){
+				$data[$i] = mysqli_fetch_array($sql);
 			}
 		}
 		$this->closeConnection();
@@ -136,9 +133,9 @@ class Database{
 	//$params2 параметр сравнения из 2 таблицы
 	function getDataFromTwoTables($table2, $column, $params1, $params2) {
 		$query = "SELECT ".implode($column, ", ")." FROM ".$this->tablename." a, ".$table2." b where a.".$params1." = b.".$params2;
-		if( $sql = mysql_query($query) ){
-			for($i = 0; $i < mysql_num_rows($sql); $i++){
-				$data[$i] = mysql_fetch_array($sql);
+		if( $sql = mysqli_query($this->mysqli, $query) ){
+			for($i = 0; $i < mysqli_num_rows($sql); $i++){
+				$data[$i] = mysqli_fetch_array($sql);
 			}
 		}
 		$this->closeConnection();
@@ -150,20 +147,20 @@ class Database{
 	//Вывод с сортировкой
 	function getDataOrderBy($sorting_type, $column_name){
 		$query = "Select * from $this->tablename ORDER BY ".$column_name." ".$sorting_type;
-		if( $sql = mysql_query($query) ){
-			for($i = 0; $i < mysql_num_rows($sql); $i++){
-				$data[$i] = mysql_fetch_array($sql);
+		if( $sql = mysqli_query($this->mysqli, $query) ){
+			for($i = 0; $i < mysqli_num_rows($sql); $i++){
+				$data[$i] = mysqli_fetch_array($sql);
 			}
 		}
 		$this->closeConnection();
 		return $data;
 	}
-	
+
 	//Функция с нестандартным запросом
 	function getDataMyQuery($query){
-		if( $sql = mysql_query($query) ){
-			for($i = 0; $i < mysql_num_rows($sql); $i++){
-				$data[$i] = mysql_fetch_array($sql);
+		if( $sql = mysqli_query($this->mysqli, $query) ){
+			for($i = 0; $i < mysqli_num_rows($sql); $i++){
+				$data[$i] = mysqli_fetch_array($sql);
 			}
 		}
 		$this->closeConnection();

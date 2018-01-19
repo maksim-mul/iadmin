@@ -5,13 +5,13 @@ function add_default_css_js(){
 	<link href="/application/static/uikit/css/uikit.min.css" rel="stylesheet">
 	<link href="/application/static/css/theme.css" rel="stylesheet">
 	<link href="/application/static/css/login.css" rel="stylesheet">
-
 	<script src="/application/static/js/jquery-3.2.1.min.js"></script>
 	<script src="/application/static/uikit/js/uikit.min.js"></script>
 	<script src="/application/static/uikit/js/uikit-icons.js"></script>
 	<?
 	return 0;
 }
+
 function add_template_css_js(){
 	//узнаем адрес вызывающего приложения
 	$path_app = mb_substr( $_SERVER['PHP_SELF'], 0, mb_strrpos( $_SERVER['PHP_SELF'], '/' ) );
@@ -21,9 +21,6 @@ function add_template_css_js(){
 	if ( file_exists( $_SERVER['DOCUMENT_ROOT'].$path_app."/static/template.js" ) )
 		echo "<script src='".$path_app."/static/template.js'></script>";
 }
-
-
-
 
 function LitePassGen($pass_len){
 	$array = array("E", "T", "O", "P", "A", "H", "K", "X", "C", "B", "M", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
