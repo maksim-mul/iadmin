@@ -2,16 +2,16 @@
 //добавляет css и js по умолчанию
 function add_default_css_js(){
 	?>
-	<link href="/application/static/uikit/css/uikit.min.css" rel="stylesheet">
-	<link href="/application/static/css/theme.css" rel="stylesheet">
-	<link href="/application/static/css/login.css" rel="stylesheet">
-	<script src="/application/static/js/jquery-3.2.1.min.js"></script>
-	<script src="/application/static/uikit/js/uikit.min.js"></script>
-	<script src="/application/static/uikit/js/uikit-icons.js"></script>
+	<link href="/core/static/uikit/css/uikit.min.css" rel="stylesheet">
+	<link href="/core/static/css/theme.css" rel="stylesheet">
+	<link href="/core/static/css/login.css" rel="stylesheet">
+	<script src="/core/static/js/jquery-3.2.1.min.js"></script>
+	<script src="/core/static/uikit/js/uikit.min.js"></script>
+	<script src="/core/static/uikit/js/uikit-icons.js"></script>
 	<?
 	return 0;
 }
-
+//добавляет css и js из вызываемой папки
 function add_template_css_js(){
 	//узнаем адрес вызывающего приложения
 	$path_app = mb_substr( $_SERVER['PHP_SELF'], 0, mb_strrpos( $_SERVER['PHP_SELF'], '/' ) );

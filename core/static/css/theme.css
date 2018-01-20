@@ -11,7 +11,9 @@ background: #f6fafd;
 .uk-nav-default .uk-nav-sub a:focus, .uk-nav-default .uk-nav-sub a:hover {
     color: #fff;
 }
-
+.uk-list-striped>li:nth-of-type(odd) {
+    background: #efefef;
+}
 
 /*Универсальные==================================================================*/
 .h1-blc{

@@ -1,20 +1,24 @@
 <?
-include_once $_SERVER['DOCUMENT_ROOT']."/application/bootstrap.php";
+include_once $_SERVER['DOCUMENT_ROOT']."/core/bootstrap.php";
 ?>
-
 <html>
 <head>
     <title><?=$SetTitle?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?
+    //Подключаем стили и js по умолчанию
+		add_default_css_js();
+    ?>
 </head>
 
 <body>
     <div uk-grid class="uk-grid-collapse">
         <div class="uk-width-auto left-panel">
-            <div class="logo">
-                <img width="50" src="https://cdn.worldvectorlogo.com/logos/slack-1.svg"> Рабочее место 1
-            </div>
-
+            <a class="uk-logo" href="/">
+              <div class="logo">
+                  <img width="50" src="/images/logo.svg"> Рабочее место 1
+              </div>
+            </a>
             <div class="left-menu">
                 <ul class="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true;">
                     <li class="uk-parent uk-open">
@@ -38,7 +42,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/application/bootstrap.php";
                         <ul class="uk-nav-sub">
                             <li><a href="/delivery/expedition/"><span class="uk-margin-small-right" uk-icon="icon: social"></span> Экспедиция</a></li>
                             <li><a href="/delivery/storage/"><span class="uk-margin-small-right" uk-icon="icon: list"></span> Список складов</a></li>
-                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Состояние авто</a></li>
+                            <li><a href="/delivery/auto/"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Состояние авто</a></li>
                         </ul>
                     </li>
                     <li class="uk-nav-divider"></li>
@@ -67,6 +71,4 @@ include_once $_SERVER['DOCUMENT_ROOT']."/application/bootstrap.php";
                     </div>
                 </div>
             </div>
-
-
             <div class="uk-container uk-margin-top">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <? include_once $_SERVER['DOCUMENT_ROOT']."/application/bootstrap.php" ?>
+    <? include_once $_SERVER['DOCUMENT_ROOT']."/core/bootstrap.php" ?>
   </head>
   <body class="tm-login-backgr">
       <div uk-height-viewport class="uk-flex uk-flex-middle uk-flex-center">
