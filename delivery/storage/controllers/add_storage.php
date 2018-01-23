@@ -8,7 +8,7 @@ $data['longitude'] = $_POST['storage_long'];
 $data['description'] = $_POST['storage_desc'];
 
 $insertData = new Database("warehouses");
-$insertData->insertData($data);
+$insertData->insertRow($data);
 
-echo '1';
+echo 'Новый склад добавлен в список.';
 ?>

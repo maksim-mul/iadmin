@@ -91,6 +91,20 @@ function init () {
     </div>
 </div>
 
+<!--Редактирование склада----------------------------------------------------------------------------------------------------------->
+<div id="edit-str" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-body">
+            <h3>Вы уверены что хотите редкатировать этот склад?</h3>
+        </div>
+
+        <div class="uk-modal-footer uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Отмена</button>
+            <button class="uk-button uk-button-danger uk-modal-close" type="button" name="sample1" id="edit_btn">Удалить</button>
+        </div>
+    </div>
+</div>
 
 <div class="uk-margin-top" uk-grid>
   <div class="uk-width-1-2">
@@ -98,7 +112,7 @@ function init () {
       <? foreach ($storage as &$value) { ?>
         <li storage-id="<?=$value['id']?>" class="storage-row"><?=$value['name']?>
           <div class="uk-float-right">
-            <a class="uk-text-warning btn-edit" uk-icon="icon: file-edit"></a>
+            <a href="#edit-str" uk-toggle class="uk-text-warning btn-edit" uk-icon="icon: file-edit"></a>
             <a href="#delit-str" uk-toggle class="uk-text-danger btn-delit" uk-icon="icon: trash"></a>
             <a class="" style="color: #2f008a;" href="https://yandex.ru/maps/213/moscow/?mode=search&text=<?=$value['latitude']?>%2C<?=$value['longitude']?>&sll=37.489376%2C54.902805" target="_blank"><span uk-icon="icon: location; ratio: 1"></span></a>
           </div>
@@ -140,22 +154,7 @@ $('#f-storage-add').click( function() {
         timeout: 5000
     	});
     }
-  });
-
-  function funcPerformed(data){
-  	if(data){
-  		alert("Склад успешно добавлен в список");
-      location.reload();
-  	}
-  	else{
-  		UIkit.notification({
-  	    message: 'Ошибка при добавлении!',
-  	    status: 'danger',
-  	    pos: 'top-center',
-  	    timeout: 5000
-  		});
-  	}
-  };
+});
 
 //Удаление нового склада============================================================================
 //удаление динамических элементов
@@ -171,24 +170,57 @@ $('#del_btn').click(function() {
 		data: {
 			id: id_storage
 		},
-		success: funcDelPerformed
+		success: funcPerformed
+	});
+});
+
+//Редактирование склада ==============================================================================
+var id_storage = '';
+$('ul').on('click', '.btn-edit', function () {
+	id_storage = $($(this)).parents(".storage-row").attr("storage-id");
+});
+id=12;
+name='Ура';
+address='Ура';
+latitude='11';
+longitude='22';
+description='Ура Ура Ура';
+
+
+$('#edit_btn').click(function() {
+  $.ajax({
+		type: "POST",
+		url: "/delivery/storage/controllers/edit_storage.php",
+		data: {
+			id: id,
+      name: name,
+      address: address,
+      latitude: latitude,
+      longitude: longitude,
+      description: description
+		},
+		success: funcPerformed
 	});
 });
 
 
-function funcDelPerformed
-(data){
+
+
+
+
+
+
+
+
+function funcPerformed(data){
   if(data){
-    alert("Склад успешно удален из списока");
+    alert(data);
     location.reload();
   }
   else{
-    UIkit.notification({
-      message: 'Ошибка при удалении!',
-      status: 'danger',
-      pos: 'top-center',
-      timeout: 5000
-    });
+    alert("Произошла ошибка");
   }
 };
+
+
 </script>
