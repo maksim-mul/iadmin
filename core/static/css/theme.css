@@ -14,6 +14,20 @@ background: #f6fafd;
 .uk-list-striped>li:nth-of-type(odd) {
     background: #efefef;
 }
+.uk-link:hover, a:hover {
+    color: #df405a;
+    text-decoration: underline;
+}
+.uk-button-primary {
+    background-color: #df405a;
+}
+.uk-button-primary:focus, .uk-button-primary:hover {
+    background-color: #d2304a;
+    color: #fff;
+}
+.uk-table td, .uk-table th{
+    border: 1px solid #e2e2e2;
+}
 
 /*Универсальные==================================================================*/
 .h1-blc{
@@ -37,6 +51,8 @@ font-size: 35px;
 display: inline-block;
 margin-bottom: 5px;
 }
+
+
 
 /*Разметка страниц*/
 
