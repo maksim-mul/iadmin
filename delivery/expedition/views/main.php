@@ -1,37 +1,45 @@
 <style>
-    th {
-        height: 30px;
-        text-align: center;
-        font-weight: 700;
-    }
-    td {
-        height: 90px;
-    }
-    .today {
-      background: #545486;
-      color: #fff;
-    }
-    th:nth-of-type(7),td:nth-of-type(7),th:nth-of-type(6),td:nth-of-type(6)  {
-        color: red;
-    }
+th {
+    height: 30px;
+    text-align: center;
+    font-weight: 700;
+}
+td {
+    height: 50px;
+}
+th:nth-of-type(7),td:nth-of-type(7),th:nth-of-type(6),td:nth-of-type(6)  {
+    color: red;
+}
 
-    th:nth-of-type(7),td:nth-of-type(7),th:nth-of-type(1),td:nth-of-type(1)  {
-        background: #efefef;
-    }
+th:nth-of-type(7),td:nth-of-type(7),th:nth-of-type(1),td:nth-of-type(1)  {
+    background: #efefef;
+}
+
+
+.today {
+  background: #fff;
+}
+
+.tab-calendar .active{
+  background: #545486;
+  color: #fff;
+}
 </style>
 
+<?
+$date = "2018-01-6";
+date("d.m.Y", strtotime($date));
+?>
 
-
-
-<div uk-grid>
-  <div class="uk-width-3-5">
+<div uk-grid class="uk-grid-small">
+  <div class="uk-width-1-3">
     <div>
       <h3 class="uk-margin-remove">
         <a href="?ym=<?php echo $prev; ?>"><span uk-icon="icon: chevron-left"></span></a>
           <?php echo $html_title; ?>
         <a href="?ym=<?php echo $next; ?>"><span uk-icon="icon: chevron-right"></span></a>
       </h3>
-      <table class="uk-table table-bordered">
+      <table class="uk-table tab-calendar">
           <tr>
               <th>Пн</th>
               <th>Вт</th>
@@ -42,15 +50,99 @@
               <th>Вс</th>
           </tr>
           <?php
-              foreach ($weeks as $week) {
-                  echo $week;
-              }
+            foreach ($weeks as $week) {
+                echo $week;
+            }
           ?>
       </table>
     </div>
   </div>
-  <div class="uk-width-2-5">
+</div>
 
+
+<script>
+$(document).ready(function(){
+  $('.tab-calendar td').click(function(e) {
+      e.preventDefault();
+      $('.tab-calendar .active').removeClass('active');
+      $(this).addClass('active');
+
+
+      day = $(this).attr("day");
+      alert(day);
+      $.ajax({
+        type: "POST",
+        url: "/delivery/expedition/controllers/day_info.php",
+        data: {
+          day: day
+          },
+          success: funcPerformed
+      });
+
+      function funcPerformed(data){
+        if(data){
+          alert(data);
+        }
+        else{
+          alert("Произошла ошибка");
+        }
+      };
+
+  });
+});
+</script>
+
+
+<div class="uk-grid" class="uk-grid-small">
+  <div class="uk-width-1-3">
+      <h3>Список складов</h3>
+      <ul class="uk-list uk-list-striped  uk-panel-scrollable uk-resize-vertical" id="storage-list" style="height: 300px; border: 1px solid #e2e2e2; padding: 0px;">
+        <? foreach ($storage as &$value) { ?>
+          <li class="">
+              <?=$value['name']?>
+              <div class="uk-float-right">
+                <a href="#delit-str" class="btn-delit list-add-stock">Добавить</a>
+                <a class="" style="color: #2f008a;" href="https://yandex.ru/maps/213/moscow/?mode=search&text=<?=$value['latitude']?>%2C<?=$value['longitude']?>&sll=37.489376%2C54.902805" target="_blank"><span uk-icon="icon: location; ratio: 1"></span></a>
+              </div>
+          </li>
+        <? } ?>
+      </ul>
+  </div>
+
+  <div class="uk-width-1-2">
+      <h3>Список точек</h3>
+      <div uk-sortable="group: sortable-group" id="test">
+          <div class="uk-margin-small">
+              <div class="uk-card uk-card-default card-stock">
+                  <div class="card-stock-title">
+                      <a style="color: #df405a;" href="https://yandex.ru/maps" target="_blank"><span uk-icon="icon: location; ratio: 1.3"></span></a> Бау Подольск
+                      <div class="uk-float-right">
+                          <span uk-icon="icon: menu; ratio: 1.3"></span>
+                      </div>
+                  </div>
+                  <div>
+                      <label>Комментарий:</label>
+                      <textarea class="uk-textarea uk-margin-remove" rows="3"></textarea>
+                      <div class="uk-margin-small-top">
+                          <div uk-grid class="uk-grid-small">
+                              <div class="uk-width-1-3">
+                                  <select class="uk-select" id="form-stacked-select">
+                                      <option>Безнал</option>
+                                      <option>Наличные</option>
+                                  </select>
+                              </div>
+                              <div class="uk-width-1-3">
+                                  <input class="uk-input" id="form-stacked-text" type="text" placeholder="Сумма">
+                              </div>
+                              <div class="uk-width-1-3 uk-text-right">
+                                  <a class="card-stock-delit">Удалить</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
 </div>
 
@@ -66,25 +158,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!--
 <div uk-grid>
     <div class="uk-width-1-3">
         <h3>Список складов</h3>
+
         <div class="uk-panel uk-panel-scrollable uk-resize-vertical" style="height: 700px;">
             <div class="uk-card uk-card-default uk-margin-small-bottom card-stock">
               <div>
@@ -103,24 +181,22 @@
               </div>
             </div>
         </div>
+
+        <ul class="uk-list uk-list-striped  uk-panel-scrollable uk-resize-vertical" id="storage-list" style="height: 300px; border: 1px solid #e2e2e2;">
+          <? foreach ($storage as &$value) { ?>
+            <li class="">
+                <?=$value['name']?>
+                <div class="uk-float-right">
+                  <a href="#delit-str" class="btn-delit list-add-stock">Добавить</a>
+                  <a class="" style="color: #2f008a;" href="https://yandex.ru/maps/213/moscow/?mode=search&text=<?=$value['latitude']?>%2C<?=$value['longitude']?>&sll=37.489376%2C54.902805" target="_blank"><span uk-icon="icon: location; ratio: 1"></span></a>
+                </div>
+            </li>
+          <? } ?>
+        </ul>
     </div>
 
-    <div class="uk-width-1-2">
+    <div class="uk-width-1-3">
         <h3>Список точек</h3>
-
-        <div class="uk-margin-bottom">
-            <div class="uk-margin-small">
-                <div class="uk-card uk-card-default card-stock">
-                    <div class="card-stock-title">
-                        <a style="color: #df405a;" href="https://yandex.ru/maps" target="_blank"><span uk-icon="icon: location; ratio: 1.3"></span></a> Старт - Серпухов
-                        <div class="uk-float-right">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div uk-sortable="group: sortable-group" id="test">
             <div class="uk-margin-small">
                 <div class="uk-card uk-card-default card-stock">
@@ -145,7 +221,7 @@
                                     <input class="uk-input" id="form-stacked-text" type="text" placeholder="Сумма">
                                 </div>
                                 <div class="uk-width-1-3 uk-text-right">
-                                    <a class="card-stock-delit">Удалить из списка</a>
+                                    <a class="card-stock-delit">Удалить</a>
                                 </div>
                             </div>
                         </div>
@@ -153,22 +229,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="uk-margin-top">
-            <div class="uk-margin-small">
-                <div class="uk-card uk-card-default card-stock">
-                    <div class="card-stock-title">
-                        <a style="color: #df405a;" href="https://yandex.ru/maps" target="_blank"><span uk-icon="icon: location; ratio: 1.3"></span></a> Финишь - Серпухов
-                        <div class="uk-float-right">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="uk-width-1-6">
-        <img class="uk-margin-top" src="/images/service/arrow.png" width="60">
     </div>
 </div>
+-->

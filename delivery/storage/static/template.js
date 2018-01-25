@@ -17,7 +17,7 @@ function init () {
 
     // Чтобы задать опции одиночным объектам и кластерам,
     // обратимся к дочерним коллекциям ObjectManager.
-    objectManager.objects.options.set('preset', 'islands#blueCircleIcon');
+    objectManager.objects.options.set('preset', 'islands#redCircleDotIcon');
     objectManager.clusters.options.set('preset', 'islands#invertedBlueClusterIcons');
     myMap.geoObjects.add(objectManager);
 
@@ -32,20 +32,22 @@ function init () {
 $('#f-storage-add').click( function() {
 	storage_name = $("#f-storage-name").val();
   storage_adress = $("#f-storage-adress").val();
-  storage_lat = $("#f-storage-lat").val();
-  storage_long = $("#f-storage-long").val();
+  storage_latlong = $("#f-storage-latlong").val();
   storage_desc = $("#f-storage-desc").val();
+  storage_time_start = $("#f-storage-time-start").val();
+  storage_time_stop = $("#f-storage-time-stop").val();
 
-  if( storage_name !=='' && storage_adress !== '' && storage_lat !== '' && storage_long !== '' ){
+  if( storage_name !=='' && storage_adress !== '' && storage_latlong !== ''){
     $.ajax({
       type: "POST",
       url: "/delivery/storage/controllers/add_storage.php",
       data: {
       	storage_name: storage_name,
         storage_adress: storage_adress,
-        storage_lat: storage_lat,
-        storage_long: storage_long,
-        storage_desc: storage_desc
+        storage_latlong: storage_latlong,
+        storage_desc: storage_desc,
+        storage_time_start: storage_time_start,
+        storage_time_stop: storage_time_stop
         },
         success: funcPerformed
       });
@@ -86,11 +88,8 @@ $('ul').on('click', '.btn-edit', function () {
   storage_name = $($(this)).parents(".storage-row").attr("storage-name");
   $("#f-edit-storage-name").val(storage_name);
 
-  storage_latitude = $($(this)).parents(".storage-row").attr("storage-latitude");
-  $("#f-edit-storage-lat").val(storage_latitude);
-
-  storage_longtitude= $($(this)).parents(".storage-row").attr("storage-longitude");
-  $("#f-edit-storage-long").val(storage_longtitude);
+  storage_latlong = $($(this)).parents(".storage-row").attr("storage-latlong");
+  $("#f-edit-storage-latlong").val(storage_latlong);
 
   storage_address = $($(this)).parents(".storage-row").attr("storage-address");
   $("#f-edit-storage-address").val(storage_address);
@@ -98,14 +97,22 @@ $('ul').on('click', '.btn-edit', function () {
   storage_desc = $($(this)).parents(".storage-row").attr("storage-desc");
   $("#f-edit-storage-desc").val(storage_desc);
 
+  storage_time_start = $($(this)).parents(".storage-row").attr("storage-op");
+  $("#f-edit-storage-time-start").val(storage_time_start);
+
+  storage_time_stop = $($(this)).parents(".storage-row").attr("storage-clos");
+  $("#f-edit-storage-time-stop").val(storage_time_stop);
+
 });
 
 $('#edit_btn').click(function() {
   storage_name = $("#f-edit-storage-name").val();
-  storage_adress = $("#f-edit-storage-adress").val();
-  storage_lat = $("#f-edit-storage-lat").val();
-  storage_long = $("#f-edit-storage-long").val();
+  storage_adress = $("#f-edit-storage-address").val();
+  storage_latlong = $("#f-edit-storage-latlong").val();
   storage_desc = $("#f-edit-storage-desc").val();
+  storage_time_start = $("#f-edit-storage-time-start").val();
+  storage_time_stop = $("#f-edit-storage-time-stop").val();
+
   $.ajax({
 		type: "POST",
 		url: "/delivery/storage/controllers/edit_storage.php",
@@ -113,9 +120,10 @@ $('#edit_btn').click(function() {
 			id: id_storage,
       name: storage_name,
       address: storage_adress,
-      latitude: storage_lat,
-      longitude: storage_long,
-      description: storage_desc
+      latlong: storage_latlong,
+      description: storage_desc,
+      storage_time_start: storage_time_start,
+      storage_time_stop: storage_time_stop
 		},
 		success: funcPerformed
 	});

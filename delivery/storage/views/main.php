@@ -3,22 +3,26 @@
 
 <a class="uk-button uk-button-default uk-margin-bottom" href="#add-str" uk-toggle><span uk-icon="icon: plus-circle"></span> Добавить склад</a>
 
-<div uk-grid class="uk-grid-small">
-  <div class="uk-width-2-5">
-    <ul class="uk-list uk-list-striped" id="storage-list" style="border: 1px solid #ababab;">
-      <? foreach ($storage as &$value) { ?>
-        <li storage-id="<?=$value['id']?>" storage-name="<?=$value['name']?>" storage-latitude="<?=$value['latitude']?>" storage-longitude="<?=$value['longitude']?>" storage-address="<?=$value['address']?>" storage-desc="<?=$value['description']?>" class="storage-row"><?=$value['name']?>
-          <div class="uk-float-right">
-            <a href="#edit-str" uk-toggle class="btn-edit" uk-icon="icon: file-edit"></a>
-            <a href="#delit-str" uk-toggle class="btn-delit" uk-icon="icon: trash"></a>
-            <a class="" style="color: #2f008a;" href="https://yandex.ru/maps/213/moscow/?mode=search&text=<?=$value['latitude']?>%2C<?=$value['longitude']?>&sll=37.489376%2C54.902805" target="_blank"><span uk-icon="icon: location; ratio: 1"></span></a>
-          </div>
-        </li>
-      <? } ?>
-    </ul>
+<div uk-grid uk-height-match="target: > div > div">
+  <div class="uk-width-1-3">
+    <div style="position: relative;">
+      <ul class="uk-list uk-list-striped uk-panel-scrollable"  id="storage-list" style="border: 1px solid #e2e2e2; padding: 0px; position: absolute; height: 100%; width: 100%">
+        <? foreach ($storage as &$value) { ?>
+          <li storage-id="<?=$value['id']?>" storage-name="<?=$value['name']?>" storage-latlong="<?=$value['latitude']?>, <?=$value['longitude']?>" storage-address="<?=$value['address']?>" storage-desc="<?=$value['description']?>" storage-op="<?=$value['time_opening']?>" storage-clos="<?=$value['time_closing']?>" class="storage-row"><?=$value['name']?>
+            <div class="uk-float-right">
+              <a href="#edit-str" uk-toggle class="btn-edit" uk-icon="icon: file-edit"></a>
+              <a href="#delit-str" uk-toggle class="btn-delit" uk-icon="icon: trash"></a>
+              <a class="" style="color: #2f008a;" href="https://yandex.ru/maps/213/moscow/?mode=search&text=<?=$value['latitude']?>%2C<?=$value['longitude']?>&sll=37.489376%2C54.902805" target="_blank"><span uk-icon="icon: location; ratio: 1"></span></a>
+            </div>
+          </li>
+        <? } ?>
+      </ul>
+    </div>
   </div>
-  <div class="uk-width-3-5">
-    <div id="map" style="width: 100%; height: 550px;"></div>
+  <div class="uk-width-2-3">
+    <div>
+      <div id="map" style="width: 100%; height:600px;"></div>
+    </div>
   </div>
 </div>
 
@@ -44,15 +48,15 @@
             </div>
         </div>
         <div class="uk-margin-small">
-            <label class="uk-form-label">Широта точки</label>
+            <label class="uk-form-label">Координаты точки</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="f-storage-lat" type="text">
+                <input class="uk-input" id="f-storage-latlong" type="text">
             </div>
         </div>
         <div class="uk-margin-small">
-            <label class="uk-form-label">Долгота точки</label>
+            <label class="uk-form-label">Время работы</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="f-storage-long" type="text">
+                Открывается в <input class="uk-input uk-width-auto" type="time" id="f-storage-time-start"> и работает до <input class="uk-input uk-width-auto" type="time" id="f-storage-time-stop">
             </div>
         </div>
         <div class="uk-margin-small">
@@ -101,16 +105,17 @@
                 <input class="uk-input" id="f-edit-storage-address" type="text">
             </div>
         </div>
+
         <div class="uk-margin-small">
-            <label class="uk-form-label">Широта точки</label>
+            <label class="uk-form-label">Координаты точки</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="f-edit-storage-lat" type="text">
+                <input class="uk-input" id="f-edit-storage-latlong" type="text">
             </div>
         </div>
         <div class="uk-margin-small">
-            <label class="uk-form-label">Долгота точки</label>
+            <label class="uk-form-label">Время работы</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="f-edit-storage-long" type="text">
+                Открывается в <input class="uk-input uk-width-auto" type="time" id="f-edit-storage-time-start"> и работает до <input class="uk-input uk-width-auto" type="time" id="f-edit-storage-time-stop">
             </div>
         </div>
         <div class="uk-margin-small">

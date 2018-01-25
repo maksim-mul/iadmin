@@ -3,10 +3,6 @@ body {
 background: #f6fafd;
 }
 
-
-
-
-
 /*Uikit==================================================================================*/
 .uk-nav-default .uk-nav-sub a:focus, .uk-nav-default .uk-nav-sub a:hover {
     color: #fff;
@@ -26,9 +22,17 @@ background: #f6fafd;
     color: #fff;
 }
 .uk-table td, .uk-table th{
-    border: 1px solid #e2e2e2;
+    border: 1px solid #cacaca;
 }
-
+.uk-list-striped>li:nth-of-type(odd){
+  border: none;
+}
+.uk-form-stacked .uk-form-label{
+    display: block;
+    margin-bottom: 2px;
+    font-size: 17px;
+    font-weight: 500;
+}
 /*Универсальные==================================================================*/
 .h1-blc{
 margin-bottom: 20px;
@@ -62,7 +66,12 @@ background: #f6f6f6;
 border-bottom: 1px solid #ebeaef;
 padding: 10px 0;
 }
-
+/*Футер*/
+.footer-panel{
+  background: #f6f6f6;
+  border-top: 1px solid #ebeaef;
+  padding: 10px 0;
+}
 /*Панель слева*/
 .left-menu .uk-nav-default>li>a:focus, .left-menu .uk-nav-default>li>a:hover {
 color: #fff;

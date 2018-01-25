@@ -2,12 +2,7 @@
 .card-stock{
 padding: 0px;
 }
-.card-stock>.card-stock-title{
-background: #efefef;
-padding: 5px 15px;
-border-bottom: 1px solid #e8e8e8;
-font-size: 20px;
-}
+
 .card-stock>div{
   padding: 10px 15px;
 }

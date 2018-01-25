@@ -60,6 +60,33 @@ class Database{
 		return $rows;
 	}
 
+	// $query = "SELECT * FROM firms ORDER BY company_name ASC";
+	//Вывод с сортировкой
+	function getDataOrderBy($sorting_type, $column_name){
+		$sql_query = "Select * from $this->tablename ORDER BY ".$column_name." ".$sorting_type;
+		$rs = $this->$db->query($sql_query);
+		$rows = $rs->fetchAll(PDO::FETCH_ASSOC);
+		$this->closeConnectToDb();
+		return $rows;
+	}
+
+	//вывод строки с подходящими параметрами
+	function getDataWithParamaeters($params){
+		$sql_query = "Select * from $this->tablename Where ";
+		foreach($params as $key => $values){
+			$key = htmlspecialchars( trim($key) );
+			$values = htmlspecialchars( trim($values) );
+			
+			$sql_query.= "$key = '$values' AND ";
+		}
+		$sql_query = substr($sql_query, 0, -4);
+		$rs = $this->$db->query($sql_query);
+		$rows = $rs->fetchAll(PDO::FETCH_ASSOC);
+		$this->closeConnectToDb();
+		return $rows;
+	}
+
+
 	//UPDATE==========================================================================================
 	//редактирование строки
 	function editRow($id, $data) {
