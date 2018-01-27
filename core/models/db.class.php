@@ -72,11 +72,10 @@ class Database{
 
 	//вывод строки с подходящими параметрами
 	function getDataWithParamaeters($params){
-		$sql_query = "Select * from $this->tablename Where ";
+		$sql_query = "Select * from $this->tablename where ";
 		foreach($params as $key => $values){
 			$key = htmlspecialchars( trim($key) );
 			$values = htmlspecialchars( trim($values) );
-			
 			$sql_query.= "$key = '$values' AND ";
 		}
 		$sql_query = substr($sql_query, 0, -4);
@@ -86,6 +85,27 @@ class Database{
 		return $rows;
 	}
 
+	//SELECT name, phone FROM staff a, user b WHERE a.id_user = b.id
+	//$table2 вторая таблица
+	//$data необходимые поля
+	//$params1 параметр сравнения из 1 таблицы
+	//$params2 параметр сравнения из 2 таблицы
+	function getDataFromTwoTables($table2, $column, $params1, $params2) {
+		$sql_query = "SELECT ".implode($column, ", ")." FROM ".$this->tablename." a, ".$table2." b where a.".$params1." = b.".$params2;
+		$rs = $this->$db->query($sql_query);
+		$rows = $rs->fetchAll(PDO::FETCH_ASSOC);
+		$this->closeConnectToDb();
+		//echo $query;
+		return $rows;
+	}
+
+	//Функция с нестандартным запросом
+	function getDataMyQuery($sql_query){
+		$rs = $this->$db->query($sql_query);
+		$rows = $rs->fetchAll(PDO::FETCH_ASSOC);
+		$this->closeConnectToDb();
+		return $rows;
+	}
 
 	//UPDATE==========================================================================================
 	//редактирование строки

@@ -5,7 +5,7 @@ th {
     font-weight: 700;
 }
 td {
-    height: 50px;
+    text-align: center
 }
 th:nth-of-type(7),td:nth-of-type(7),th:nth-of-type(6),td:nth-of-type(6)  {
     color: red;
@@ -63,33 +63,46 @@ date("d.m.Y", strtotime($date));
 <script>
 $(document).ready(function(){
   $('.tab-calendar td').click(function(e) {
-      e.preventDefault();
       $('.tab-calendar .active').removeClass('active');
+
+      //Отправка в БД
+    	$('#content>div').each(function(){
+        id = $(this).attr('storage-id');
+        comment = $(this).find("textarea").val();
+        sum = $(this).find("input").val();
+        day = $(this).attr("day");
+        oplata = $(this).find("select").val();
+
+        alert(oplata);
+    	});
+
+
+
+
+
       $(this).addClass('active');
-
-
       day = $(this).attr("day");
-      alert(day);
+
+      //Получение информации из БД
       $.ajax({
         type: "POST",
         url: "/delivery/expedition/controllers/day_info.php",
         data: {
           day: day
           },
-          success: funcPerformed
+          success: sucPull
       });
-
-      function funcPerformed(data){
-        if(data){
-          alert(data);
-        }
-        else{
-          alert("Произошла ошибка");
-        }
-      };
-
   });
 });
+
+function sucPull(data){
+  if(data){
+    $("#content").html(data);
+  }
+  else{
+    alert("Произошла ошибка");
+  }
+};
 </script>
 
 
@@ -98,7 +111,7 @@ $(document).ready(function(){
       <h3>Список складов</h3>
       <ul class="uk-list uk-list-striped  uk-panel-scrollable uk-resize-vertical" id="storage-list" style="height: 300px; border: 1px solid #e2e2e2; padding: 0px;">
         <? foreach ($storage as &$value) { ?>
-          <li class="">
+          <li>
               <?=$value['name']?>
               <div class="uk-float-right">
                 <a href="#delit-str" class="btn-delit list-add-stock">Добавить</a>
@@ -111,8 +124,9 @@ $(document).ready(function(){
 
   <div class="uk-width-1-2">
       <h3>Список точек</h3>
-      <div uk-sortable="group: sortable-group" id="test">
+      <div uk-sortable="group: sortable-group" id="content">
           <div class="uk-margin-small">
+            <!--
               <div class="uk-card uk-card-default card-stock">
                   <div class="card-stock-title">
                       <a style="color: #df405a;" href="https://yandex.ru/maps" target="_blank"><span uk-icon="icon: location; ratio: 1.3"></span></a> Бау Подольск
@@ -141,18 +155,11 @@ $(document).ready(function(){
                       </div>
                   </div>
               </div>
+            -->
           </div>
       </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
 
 
 
