@@ -15,17 +15,18 @@ $expeditions = $selectData->getDataMyQuery($sql_query);
 if( !empty( $expeditions ) ){
   foreach ($expeditions as $value) {
   ?>
-    <div class="uk-card uk-card-default card-stock" storage-id="<?=$value['id_warehouses']?>">
+    <div class="uk-card uk-card-default card-stock" day="<?=$value['date_travel']?>" storage-id="<?=$value['id_warehouses']?>" id_exp="<?=$value['id']?>">
         <div class="card-stock-title">
             <a style="color: #df405a;" href="https://yandex.ru/maps/213/moscow/?mode=search&text=<?=$value['latitude']?>%2C<?=$value['longitude']?>&sll=37.489376%2C54.902805" target="_blank"><span uk-icon="icon: location; ratio: 1.3"></span></a>
             <span><?=$value["name"]?></span>
             <div class="uk-float-right">
-                <span uk-icon="icon: menu; ratio: 1.3"></span>
+                <span uk-icon="icon: clock;"></span>
+                <?=date( 'H:i', $value['time_opening']) ?> до <?=date( 'H:i', $value['time_closing'])?>
             </div>
         </div>
         <div>
             <label>Комментарий:</label>
-            <textarea class="uk-textarea uk-margin-remove" rows="3"><?=$value["comment"]?></textarea>
+            <textarea class="uk-textarea uk-margin-remove" rows="4"><?=$value["comment"]?></textarea>
             <div class="uk-margin-small-top">
                 <div uk-grid class="uk-grid-small">
                     <div class="uk-width-1-3">
@@ -35,7 +36,7 @@ if( !empty( $expeditions ) ){
                         </select>
                     </div>
                     <div class="uk-width-1-3">
-                        <input class="uk-input" id="form-stacked-text" type="text" placeholder="<?=$value["sum_payment"]?>" value="<?=$value["sum_payment"]?>">
+                        <input class="uk-input" id="form-stacked-text" type="text" placeholder="<?=$value["sum_papayment_sumyment"]?>" value="<?=$value["payment_sum"]?>">
                     </div>
                     <div class="uk-width-1-3 uk-text-right">
                         <a class="card-stock-delit">Удалить</a>

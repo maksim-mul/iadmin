@@ -119,6 +119,7 @@ class Database{
 		}
 		$sql_query = substr($sql_query, 0, -2);
 		$sql_query.=" WHERE  id =".$id;
+		//echo $sql_query;
 		$this->$db->query($sql_query);
 		$this->closeConnectToDb();
 	}

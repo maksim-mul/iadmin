@@ -67,17 +67,27 @@ $(document).ready(function(){
 
       //Отправка в БД
     	$('#content>div').each(function(){
-        id = $(this).attr('storage-id');
+        id = $(this).attr('id_exp');
+        id_warehouses = $(this).attr('storage-id');
         comment = $(this).find("textarea").val();
         sum = $(this).find("input").val();
         day = $(this).attr("day");
-        oplata = $(this).find("select").val();
-
-        alert(oplata);
+        //oplata = $(this).find("select").val();
+        oplata = 1;
+        $.ajax({
+          type: "POST",
+          url: "/delivery/expedition/controllers/day_edit.php",
+          data: {
+            id: id,
+            id_warehouses: id_warehouses,
+            day: day,
+            comment: comment,
+            oplata: oplata,
+            sum: sum
+            },
+            success: sucEdit
+        });
     	});
-
-
-
 
 
       $(this).addClass('active');
@@ -98,6 +108,15 @@ $(document).ready(function(){
 function sucPull(data){
   if(data){
     $("#content").html(data);
+  }
+  else{
+    alert("Произошла ошибка");
+  }
+};
+
+function sucEdit(data){
+  if(data){
+
   }
   else{
     alert("Произошла ошибка");
