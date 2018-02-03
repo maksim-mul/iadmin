@@ -2,26 +2,21 @@
 include_once $_SERVER['DOCUMENT_ROOT']."/core/bootstrap.php";
 $date =  htmlspecialchars( trim( $_POST['day'] ) );
 
-
-
 $selectData = new Database("expeditions");
-$sql_query = "SELECT * FROM warehouses a, expeditions b WHERE a.id = b.id_warehouses AND date_travel='".$date."'" ;
-
-
-
-
+$sql_query = "SELECT * FROM warehouses a, expeditions b WHERE a.id = b.id_warehouses AND date_travel='".$date."' ORDER BY priority ASC " ;
 $expeditions = $selectData->getDataMyQuery($sql_query);
+
 
 if( !empty( $expeditions ) ){
   foreach ($expeditions as $value) {
   ?>
-    <div class="uk-card uk-card-default card-stock" day="<?=$value['date_travel']?>" storage-id="<?=$value['id_warehouses']?>" id_exp="<?=$value['id']?>">
+    <div class="uk-card uk-card-default card-stock" storage-id="<?=$value['id_warehouses']?>" id_exp="<?=$value['id']?>">
         <div class="card-stock-title">
             <a style="color: #df405a;" href="https://yandex.ru/maps/213/moscow/?mode=search&text=<?=$value['latitude']?>%2C<?=$value['longitude']?>&sll=37.489376%2C54.902805" target="_blank"><span uk-icon="icon: location; ratio: 1.3"></span></a>
             <span><?=$value["name"]?></span>
             <div class="uk-float-right">
                 <span uk-icon="icon: clock;"></span>
-                <?=date( 'H:i', $value['time_opening']) ?> до <?=date( 'H:i', $value['time_closing'])?>
+                <?=date("H:i", strtotime($value['time_opening']))?> - <?=date("H:i", strtotime($value['time_closing']))?>
             </div>
         </div>
         <div>
@@ -30,16 +25,16 @@ if( !empty( $expeditions ) ){
             <div class="uk-margin-small-top">
                 <div uk-grid class="uk-grid-small">
                     <div class="uk-width-1-3">
-                        <select class="uk-select" id="form-stacked-select">
-                            <option <? if ( $value["payment_type"] == 0 ) echo 'selected '; ?> >Безнал</option>
-                            <option <? if ( $value["payment_type"] == 1 ) echo 'selected '; ?> >Наличные</option>
+                        <select class="uk-select" id="pay_type">
+                            <option value="0" <? if ( $value["payment_type"] == 0 ) echo 'selected '; ?>>Наличные</option>
+                            <option value="1" <? if ( $value["payment_type"] == 1 ) echo 'selected '; ?>>Безнал</option>
                         </select>
                     </div>
                     <div class="uk-width-1-3">
-                        <input class="uk-input" id="form-stacked-text" type="text" placeholder="<?=$value["sum_papayment_sumyment"]?>" value="<?=$value["payment_sum"]?>">
+                        <input class="uk-input" type="text" placeholder="<?=$value["sum_papayment_sumyment"]?>" value="<?=$value["payment_sum"]?>">
                     </div>
                     <div class="uk-width-1-3 uk-text-right">
-                        <a class="card-stock-delit">Удалить</a>
+                        <a class="card-stock-delit" id-exp="<?=$value['id']?>">Удалить</a>
                     </div>
                 </div>
             </div>
@@ -47,14 +42,8 @@ if( !empty( $expeditions ) ){
     </div>
   <?
   }
-  print_r($rs);
 }
 else{
-echo 'На этот день поездка не планируется.';
+  echo 'На этот день поездка не планируется.';
 }
-
-
-
-
-$data = array();
 ?>

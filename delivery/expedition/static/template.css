@@ -27,3 +27,26 @@ line-height: 30px;
 color: #df405a;
 text-decoration: underline;
 }
+
+/*Таблица*/
+th {
+    height: 30px;
+    text-align: center;
+    font-weight: 700;
+}
+td {
+    text-align: center
+}
+th:nth-of-type(7),td:nth-of-type(7),th:nth-of-type(6),td:nth-of-type(6)  {
+    color: red;
+}
+th:nth-of-type(7),td:nth-of-type(7),th:nth-of-type(1),td:nth-of-type(1)  {
+    background: #efefef;
+}
+.today {
+  background: #fff;
+}
+.tab-calendar .active{
+  background: #545486;
+  color: #fff;
+}
