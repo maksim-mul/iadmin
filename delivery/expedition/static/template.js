@@ -33,7 +33,7 @@ $(document).ready(function(){
 
   // текущая дата
   var date = new Date();
-  day = date.getFullYear()+":"+date.getMonth()+":"+date.getDate();
+  day = date.getFullYear()+":"+(date.getMonth()+1)+":"+date.getDate();
 
   //Доставка в текущий день
   $.ajax({

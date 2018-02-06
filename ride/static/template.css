@@ -1,0 +1,21 @@
+.uk-card-default {
+  background: #e6e6e6;
+  color: #666;
+  box-shadow: 0 5px 15px rgba(0,0,0,.08);
+  border: 1px solid #c3c3c3;
+}
+.mob-info-blc{
+  padding: 15px;
+}
+.mob-info-blc .uk-accordion-title{
+  font-size: 20px;
+  margin-bottom: 3px;
+  color: #000 !important;
+}
+.uk-accordion-content span{
+  color: #000;
+  font-weight: 600;
+}
+.uk-accordion-content p{
+  line-height: 20px;
+}

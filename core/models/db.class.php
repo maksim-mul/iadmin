@@ -1,9 +1,4 @@
 <?
-define("HOST", "localhost");
-define("DBNAME", "iadmin");
-define("DBUSER", "root");
-define("DBPASSWORD", "");
-
 class Database{
 	//название таблицы
 	public $tablename;
