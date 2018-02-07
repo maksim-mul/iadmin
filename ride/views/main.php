@@ -27,6 +27,18 @@
                         </li>
                     </ul>
 
+                    <p class="uk-margin-small" style="font-size: 18px;line-height: 20px;">
+                    <span style="font-weight: 600;">Оплата:</span>
+                    <?
+                    if( $value["payment_type"]==0 ){
+                      echo "Наличные ".$value["payment_sum"]." р.";
+                    }
+                    elseif( $value["payment_type"]==1 ){
+                      echo "Безнал";
+                    }
+                    ?>
+                    </p>
+
                     <p class="uk-margin-remove-top" style="font-size: 18px;line-height: 20px;">
                     <?
                     if( $value["comment"] == "" ){
