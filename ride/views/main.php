@@ -9,7 +9,20 @@
   </head>
   <body>
     <div class="uk-container uk-margin-top uk-margin-large-bottom">
-      <h1 style="font-size: 30px; text-align: center;">Доставки на сегодня</h1>
+      <h1 style="font-size: 30px; text-align: center;">
+        <a href="?ymd=<?php echo $prev; ?>"><span uk-icon="icon: chevron-left"></span></a>
+        Доставки
+        <?
+        $today = date('Y-m-d');
+        if( $today == $ym ){
+          echo "сегодня";
+        }
+        else{
+          echo date("d.m.y", strtotime($ym));
+        }
+        ?>
+        <a href="?ymd=<?php echo $next; ?>"><span uk-icon="icon: chevron-right"></span></a>
+      </h1>
       <div class="uk-child-width-1-1 uk-grid-small uk-grid-match" uk-grid>
         <?
           foreach ($expeditions as $key => $value) {

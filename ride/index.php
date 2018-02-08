@@ -10,18 +10,15 @@ if (isset($_GET['ymd'])) {
     $ym = date('Y-m-d');
 }
 // Check format
-$timestamp = strtotime($ym . '-01');
-echo $timestamp;
-
-
-$prev = date('Y-m', mktime(0, 0, 0, date('m', $timestamp)-1, 1, date('Y', $timestamp)));
-$next = date('Y-m', mktime(0, 0, 0, date('m', $timestamp)+1, 1, date('Y', $timestamp)));
+$timestamp = strtotime($ym);
+$prev = date('Y-m-d', mktime(0, 0, 0, date('m', $timestamp), date('d', $timestamp)-1, date('Y', $timestamp)));
+$next = date('Y-m-d', mktime(0, 0, 0, date('m', $timestamp), date('d', $timestamp)+1, date('Y', $timestamp)));
 
 
 
 
 $selectData = new Database("expeditions");
-$sql_query = "SELECT * FROM warehouses a, expeditions b WHERE a.id = b.id_warehouses AND date_travel='2018-02-06' ORDER BY priority ASC " ;
+$sql_query = "SELECT * FROM warehouses a, expeditions b WHERE a.id = b.id_warehouses AND date_travel='".$ym."' ORDER BY priority ASC " ;
 $expeditions = $selectData->getDataMyQuery($sql_query);
 
 include_once $_SERVER['DOCUMENT_ROOT']."/ride/views/main.php";

@@ -22,6 +22,14 @@ include_once $_SERVER['DOCUMENT_ROOT']."/core/bootstrap.php";
             <div class="left-menu">
                 <ul class="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true;">
                     <li class="uk-parent uk-open">
+                        <a href="#"><span class="uk-margin-small-right" uk-icon="icon: delivery"></span> Служба доставки</a>
+                        <ul class="uk-nav-sub">
+                            <li><a href="/delivery/expedition/"><span class="uk-margin-small-right" uk-icon="icon: social"></span> Экспедиция</a></li>
+                            <li><a href="/delivery/storage/"><span class="uk-margin-small-right" uk-icon="icon: list"></span> Список складов</a></li>
+                            <li><a href="/delivery/auto/"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Состояние авто</a></li>
+                        </ul>
+                    </li>
+                    <li class="uk-parent uk-open">
                         <a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Проекты</a>
                         <ul class="uk-nav-sub">
                             <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Проекты и смета</a></li>
@@ -35,14 +43,6 @@ include_once $_SERVER['DOCUMENT_ROOT']."/core/bootstrap.php";
                         <ul class="uk-nav-sub">
                             <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Клиенты</a></li>
                             <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Работники</a></li>
-                        </ul>
-                    </li>
-                    <li class="uk-parent uk-open">
-                        <a href="#"><span class="uk-margin-small-right" uk-icon="icon: delivery"></span> Служба доставки</a>
-                        <ul class="uk-nav-sub">
-                            <li><a href="/delivery/expedition/"><span class="uk-margin-small-right" uk-icon="icon: social"></span> Экспедиция</a></li>
-                            <li><a href="/delivery/storage/"><span class="uk-margin-small-right" uk-icon="icon: list"></span> Список складов</a></li>
-                            <li><a href="/delivery/auto/"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Состояние авто</a></li>
                         </ul>
                     </li>
                     <li class="uk-nav-divider"></li>
