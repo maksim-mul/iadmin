@@ -64,7 +64,7 @@
                   </p>
                   <div uk-grid>
                     <div class="uk-width-expand">
-                      <a class="uk-width-1-1 uk-button uk-button-secondary" href="yandexmaps://maps.yandex.ru/?pt=<?=$value['longitude']?>,<?=$value['latitude']?>&z=18&l=map">Поехали</a>
+                      <a class="uk-width-1-1 uk-button uk-button-secondary" href="yandexnavi://show_point_on_map?lat=<?=$value['latitude']?>&lon=<?=$value['longitude']?>&zoom=12&no-balloon=0&desc=<?=$value['name']?>">Поехали</a>
                     </div>
                   </div>
                 </div>
