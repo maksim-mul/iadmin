@@ -33,6 +33,9 @@ background: #f6fafd;
     font-size: 17px;
     font-weight: 500;
 }
+.uk-modal-body{
+  padding: 15px;
+}
 /*Универсальные==================================================================*/
 .h1-blc{
 margin-bottom: 20px;

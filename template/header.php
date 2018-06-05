@@ -25,6 +25,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/core/bootstrap.php";
                         <a href="#"><span class="uk-margin-small-right" uk-icon="icon: delivery"></span> Служба доставки</a>
                         <ul class="uk-nav-sub">
                             <li><a href="/delivery/expedition/"><span class="uk-margin-small-right" uk-icon="icon: social"></span> Экспедиция</a></li>
+                            <li><a href=""><span class="uk-margin-small-right" uk-icon="icon: location"></span> Доставка клиентам</a></li>
                             <li><a href="/delivery/storage/"><span class="uk-margin-small-right" uk-icon="icon: list"></span> Список складов</a></li>
                             <li><a href="/delivery/auto/"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Состояние авто</a></li>
                         </ul>
@@ -32,12 +33,13 @@ include_once $_SERVER['DOCUMENT_ROOT']."/core/bootstrap.php";
                     <li class="uk-parent uk-open">
                         <a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Проекты</a>
                         <ul class="uk-nav-sub">
-                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Проекты и смета</a></li>
+                            <!--<li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Проекты и смета</a></li>
                             <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: work"></span> Работы и цены</a></li>
-                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: statistika"></span> Статистика</a></li>
+                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: statistika"></span> Статистика</a></li>-->
                             <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: video_cam"></span> Камеры</a></li>
                         </ul>
                     </li>
+                    <!--
                     <li class="uk-parent uk-open">
                         <a href="#"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Пользователи</a>
                         <ul class="uk-nav-sub">
@@ -45,6 +47,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/core/bootstrap.php";
                             <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Работники</a></li>
                         </ul>
                     </li>
+                    -->
                     <li class="uk-nav-divider"></li>
                 </ul>
             </div>

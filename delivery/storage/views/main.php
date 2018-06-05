@@ -8,11 +8,11 @@
     <div style="position: relative;">
       <ul class="uk-list uk-list-striped uk-panel-scrollable"  id="storage-list" style="border: 1px solid #e2e2e2; padding: 0px; position: absolute; height: 100%; width: 100%">
         <? foreach ($storage as &$value) { ?>
-          <li storage-id="<?=$value['id']?>" storage-name="<?=$value['name']?>" storage-latlong="<?=$value['latitude']?>, <?=$value['longitude']?>" storage-address="<?=$value['address']?>" storage-desc="<?=$value['description']?>" storage-op="<?=$value['time_opening']?>" storage-clos="<?=$value['time_closing']?>" class="storage-row"><?=$value['name']?>
+          <li storage-id="<?=$value['id']?>" storage-name="<?=$value['name']?>" latitude="<?=$value['latitude']?>" longitude="<?=$value['longitude']?>" storage-latlong="<?=$value['latitude']?>, <?=$value['longitude']?>" storage-address="<?=$value['address']?>" storage-desc="<?=$value['description']?>" storage-op="<?=$value['time_opening']?>" storage-clos="<?=$value['time_closing']?>" class="storage-row"><?=$value['name']?>
             <div class="uk-float-right">
               <a href="#edit-str" uk-toggle class="btn-edit" uk-icon="icon: file-edit"></a>
               <a href="#delit-str" uk-toggle class="btn-delit" uk-icon="icon: trash"></a>
-              <a class="" style="color: #2f008a;" href="https://yandex.ru/maps/213/moscow/?mode=search&text=<?=$value['latitude']?>%2C<?=$value['longitude']?>&sll=37.489376%2C54.902805" target="_blank"><span uk-icon="icon: location; ratio: 1"></span></a>
+              <a class="storage_location" latitude="<?=$value['latitude']?>" longitude="<?=$value['longitude']?>" style="color: #2f008a;"><span uk-icon="icon: location; ratio: 1"></span></a>
             </div>
           </li>
         <? } ?>
@@ -34,6 +34,7 @@
     <div class="h1-blc">
       <h3 style="margin-bottom: 10px;">Добавить новый склад</h3>
     </div>
+    <div id="map_3" style="width: 100%; height: 400px;"></div>
     <form class="uk-form-stacked">
         <div class="uk-margin-small">
             <label class="uk-form-label">Название склада/фирмы</label>
@@ -47,7 +48,7 @@
                 <input class="uk-input" id="f-storage-adress" type="text">
             </div>
         </div>
-        <div class="uk-margin-small">
+        <div class="uk-margin-small" style="display: none;">
             <label class="uk-form-label">Координаты точки</label>
             <div class="uk-form-controls">
                 <input class="uk-input" id="f-storage-latlong" type="text">
@@ -92,6 +93,7 @@
     <div class="h1-blc">
       <h3 style="margin-bottom: 10px;">Редактиование склада</h3>
     </div>
+    <div id="map_2" style="width: 100%; height: 400px;"></div>
     <form class="uk-form-stacked">
         <div class="uk-margin-small">
             <label class="uk-form-label">Название склада/фирмы</label>
@@ -106,7 +108,7 @@
             </div>
         </div>
 
-        <div class="uk-margin-small">
+        <div class="uk-margin-small" style="display: none;">
             <label class="uk-form-label">Координаты точки</label>
             <div class="uk-form-controls">
                 <input class="uk-input" id="f-edit-storage-latlong" type="text">

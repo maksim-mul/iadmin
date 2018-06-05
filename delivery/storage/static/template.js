@@ -2,18 +2,18 @@
 ymaps.ready(init);
 function init () {
     var myMap = new ymaps.Map('map', {
-            center: [55.76, 37.64],
-            zoom: 10
-        }, {
-            searchControlProvider: 'yandex#search'
-        }),
-        objectManager = new ymaps.ObjectManager({
-            // Чтобы метки начали кластеризоваться, выставляем опцию.
-            clusterize: true,
-            // ObjectManager принимает те же опции, что и кластеризатор.
-            gridSize: 32,
-            clusterDisableClickZoom: true
-        });
+        center: [55.76, 37.64],
+        zoom: 10
+    }, {
+        searchControlProvider: 'yandex#search'
+    }),
+    objectManager = new ymaps.ObjectManager({
+        // Чтобы метки начали кластеризоваться, выставляем опцию.
+        clusterize: true,
+        // ObjectManager принимает те же опции, что и кластеризатор.
+        gridSize: 32,
+        clusterDisableClickZoom: true
+    });
 
     // Чтобы задать опции одиночным объектам и кластерам,
     // обратимся к дочерним коллекциям ObjectManager.
@@ -26,7 +26,54 @@ function init () {
     }).done(function(data) {
         objectManager.add(data);
     });
+
+    //перемещение к точке
+    $('.storage_location').click(function(e) {
+        var latitude = $($(this)).attr("latitude");
+        var longitude = $($(this)).attr("longitude");
+        myMap.setCenter([latitude, longitude], 15);
+    });
+
+    //карта для редактирования===========================
+    myMap_2 = new ymaps.Map('map_2', {
+        center: [54.913468, 37.416843],
+        zoom: 9
+    }, {
+        searchControlProvider: 'yandex#search'
+    });
+    myPlacemark2 = new ymaps.Placemark([54.913468, 37.416843], {}, {
+        draggable: true,
+        preset: 'islands#blueGovernmentIcon'
+    });
+    myMap_2.geoObjects.add(myPlacemark2);
+
+    //карта для добавления==============================
+    myMap_3 = new ymaps.Map('map_3', {
+        center: [54.913468, 37.416843],
+        zoom: 9
+    }, {
+        searchControlProvider: 'yandex#search'
+    });
+    myPlacemark3 = new ymaps.Placemark([54.913468, 37.416843], {}, {
+        draggable: true,
+        preset: 'islands#blueGovernmentIcon'
+    });
+    myMap_3.geoObjects.add(myPlacemark3);
+
+    //смена координат при нажатии на карту
+    myMap_3.events.add('click', function (e) {
+      var coords = e.get('coords');
+      myPlacemark3.geometry.setCoordinates(coords);
+      $("#f-storage-latlong").val(coords);
+    });
+
+    //смена координаты при передвижении точки
+    myPlacemark3.events.add("dragend", function (e) {
+        coords = this.geometry.getCoordinates();
+        $("#f-storage-latlong").val(coords);
+    }, myPlacemark3);
 }
+
 
 //Добавление нового склада============================================================================
 $('#f-storage-add').click( function() {
@@ -62,7 +109,7 @@ $('#f-storage-add').click( function() {
     }
 });
 
-//Удаление нового склада============================================================================
+//Удаление склада============================================================================
 //удаление динамических элементов
 var id_storage = '';
 $('ul').on('click', '.btn-delit', function () {
@@ -103,6 +150,26 @@ $('ul').on('click', '.btn-edit', function () {
   storage_time_stop = $($(this)).parents(".storage-row").attr("storage-clos");
   $("#f-edit-storage-time-stop").val(storage_time_stop);
 
+  //отмечаем на карте
+  latitude = $($(this)).parents(".storage-row").attr("latitude");
+  longitude = $($(this)).parents(".storage-row").attr("longitude");
+
+  myPlacemark2.geometry.setCoordinates([latitude, longitude]);
+  myMap_2.setCenter([latitude, longitude]);
+
+  //смена координат при передвижении точки
+  myPlacemark2.events.add("dragend", function (e) {
+      coords = this.geometry.getCoordinates();
+      //alert(coords);
+      $("#f-edit-storage-latlong").val(coords);
+  }, myPlacemark2);
+
+  //смена координат при нажатии на карту
+  myMap_2.events.add('click', function (e) {
+    var coords = e.get('coords');
+    myPlacemark2.geometry.setCoordinates(coords);
+    $("#f-edit-storage-latlong").val(coords);
+  });
 });
 
 $('#edit_btn').click(function() {
@@ -129,12 +196,10 @@ $('#edit_btn').click(function() {
 	});
 });
 
-
-
 //Итог выполнения=======================================================================================
 function funcPerformed(data){
   if(data){
-    alert(data);
+    //alert(data);
     location.reload();
   }
   else{
