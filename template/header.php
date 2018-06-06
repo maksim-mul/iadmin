@@ -27,27 +27,16 @@ include_once $_SERVER['DOCUMENT_ROOT']."/core/bootstrap.php";
                             <li><a href="/delivery/expedition/"><span class="uk-margin-small-right" uk-icon="icon: social"></span> Экспедиция</a></li>
                             <li><a href=""><span class="uk-margin-small-right" uk-icon="icon: location"></span> Доставка клиентам</a></li>
                             <li><a href="/delivery/storage/"><span class="uk-margin-small-right" uk-icon="icon: list"></span> Список складов</a></li>
-                            <li><a href="/delivery/auto/"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Состояние авто</a></li>
+                            <!--<li><a href="/delivery/auto/"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Состояние авто</a></li>-->
                         </ul>
                     </li>
                     <li class="uk-parent uk-open">
-                        <a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Проекты</a>
+                        <a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Сервис</a>
                         <ul class="uk-nav-sub">
-                            <!--<li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Проекты и смета</a></li>
-                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: work"></span> Работы и цены</a></li>
-                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: statistika"></span> Статистика</a></li>-->
-                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: video_cam"></span> Камеры</a></li>
+                            <li><a href="/service/cameras/"><span class="uk-margin-small-right" uk-icon="icon: video_cam"></span> Камеры</a></li>
+                            <li><a href="/service/import/"><span class="uk-margin-small-right" uk-icon="icon: import"></span> Импорт</a></li>
                         </ul>
                     </li>
-                    <!--
-                    <li class="uk-parent uk-open">
-                        <a href="#"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Пользователи</a>
-                        <ul class="uk-nav-sub">
-                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Клиенты</a></li>
-                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Работники</a></li>
-                        </ul>
-                    </li>
-                    -->
                     <li class="uk-nav-divider"></li>
                 </ul>
             </div>
@@ -56,9 +45,11 @@ include_once $_SERVER['DOCUMENT_ROOT']."/core/bootstrap.php";
         <div class="uk-width-expand">
             <div class="top-panel">
                 <div class="uk-container">
-                    <div class="uk-float-left">
-                        <a style="font-size: 18px; text-decoration: none; color: #666;"> Муллаев М.В.</a>
-                    </div>
+                    <a href="https://lcab.sms-uslugi.ru/" target="_blank">
+                      <div class="uk-float-left uk-flex uk-flex-middle" style="font-size: 18px; margin-top: 7px; color: #333;">
+                          SMS: <?=round($sms_balance)?>&thinsp;<img src="/images/icons/ruble.svg" width="25">
+                      </div>
+                    </a>
 
                     <div class="uk-float-right">
                       <form class="uk-margin-remove" action="" method="post">
@@ -74,4 +65,5 @@ include_once $_SERVER['DOCUMENT_ROOT']."/core/bootstrap.php";
                     </div>
                 </div>
             </div>
-            <div class="uk-container uk-margin-top">
+            <div uk-height-viewport="offset-top: true; offset-bottom: true">
+              <div class="uk-container uk-margin-top uk-margin-large-bottom">

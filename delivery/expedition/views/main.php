@@ -1,5 +1,5 @@
 <div uk-grid class="uk-grid-small">
-  <div class="uk-width-1-3">
+  <div class="uk-width-1-4">
     <div>
       <h3 class="uk-margin-remove">
         <a href="?ym=<?php echo $prev; ?>"><span uk-icon="icon: chevron-left"></span></a>
@@ -29,13 +29,13 @@
 <div class="uk-grid" class="uk-grid-small">
   <div class="uk-width-1-3">
       <h3>Список складов</h3>
-      <ul class="uk-list uk-list-striped  uk-panel-scrollable uk-resize-vertical" id="storage-list" style="height: 400px; border: 1px solid #e2e2e2; padding: 0px;">
+      <ul class="uk-list uk-list-striped  uk-panel-scrollable uk-resize-vertical" id="storage-list" style="height: 700px; border: 1px solid #e2e2e2; padding: 0px;">
         <? foreach ($storage as &$value) { ?>
           <li>
               <?=$value['name']?>
               <div class="uk-float-right">
                 <a id_storage="<?=$value['id']?>" time_open="<?=date("H:i", strtotime($value['time_opening']))?>" time_close="<?=date("H:i", strtotime($value['time_closing']))?>" latitude="<?=$value['latitude']?>" longitude="<?=$value['longitude']?>" name="<?=$value['name']?>" class="btn-delit list-add-stock">Добавить</a>
-                <a class="" style="color: #2f008a;" href="https://yandex.ru/maps/213/moscow/?mode=search&text=<?=$value['latitude']?>%2C<?=$value['longitude']?>&sll=37.489376%2C54.902805" target="_blank"><span uk-icon="icon: location; ratio: 1"></span></a>
+                <a class="" style="color: #2f008a;" href="/delivery/storage/?lat=<?=$value['latitude']?>&long=<?=$value['longitude']?>" target="_blank"><span uk-icon="icon: location; ratio: 1"></span></a>
               </div>
           </li>
         <? } ?>

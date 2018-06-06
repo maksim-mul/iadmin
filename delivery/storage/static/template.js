@@ -1,9 +1,10 @@
 //Отрисовка объектов на яндек карте==================================================================
 ymaps.ready(init);
 function init () {
+    //основная карта
     var myMap = new ymaps.Map('map', {
-        center: [55.76, 37.64],
-        zoom: 10
+        center: [lat, long],
+        zoom: zoom
     }, {
         searchControlProvider: 'yandex#search'
     }),
@@ -17,7 +18,6 @@ function init () {
 
     // Чтобы задать опции одиночным объектам и кластерам,
     // обратимся к дочерним коллекциям ObjectManager.
-    objectManager.objects.options.set('preset', 'islands#redCircleDotIcon');
     objectManager.clusters.options.set('preset', 'islands#invertedBlueClusterIcons');
     myMap.geoObjects.add(objectManager);
 
@@ -27,12 +27,14 @@ function init () {
         objectManager.add(data);
     });
 
-    //перемещение к точке
+    //перемещение к точке================================
     $('.storage_location').click(function(e) {
         var latitude = $($(this)).attr("latitude");
         var longitude = $($(this)).attr("longitude");
         myMap.setCenter([latitude, longitude], 15);
     });
+
+
 
     //карта для редактирования===========================
     myMap_2 = new ymaps.Map('map_2', {
@@ -46,6 +48,8 @@ function init () {
         preset: 'islands#blueGovernmentIcon'
     });
     myMap_2.geoObjects.add(myPlacemark2);
+
+
 
     //карта для добавления==============================
     myMap_3 = new ymaps.Map('map_3', {
@@ -157,7 +161,7 @@ $('ul').on('click', '.btn-edit', function () {
   myPlacemark2.geometry.setCoordinates([latitude, longitude]);
   myMap_2.setCenter([latitude, longitude]);
 
-  //смена координат при передвижении точки
+	//смена координат при передвижении точки
   myPlacemark2.events.add("dragend", function (e) {
       coords = this.geometry.getCoordinates();
       //alert(coords);
@@ -199,7 +203,6 @@ $('#edit_btn').click(function() {
 //Итог выполнения=======================================================================================
 function funcPerformed(data){
   if(data){
-    //alert(data);
     location.reload();
   }
   else{

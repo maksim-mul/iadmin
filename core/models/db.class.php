@@ -55,6 +55,14 @@ class Database{
 		return $rows;
 	}
 
+	function getDataById($id) {
+		$sql_query = "Select * from $this->tablename where id = '$id'";
+		$rs = $this->$db->query($sql_query);
+		$row = $rs->fetchAll(PDO::FETCH_ASSOC);
+		$this->closeConnectToDb();
+		return $row;
+	}
+
 	// $query = "SELECT * FROM firms ORDER BY company_name ASC";
 	//Вывод с сортировкой
 	function getDataOrderBy($sorting_type, $column_name){

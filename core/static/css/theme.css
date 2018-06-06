@@ -36,6 +36,9 @@ background: #f6fafd;
 .uk-modal-body{
   padding: 15px;
 }
+.uk-container {
+    max-width: 1500px !important;
+}
 /*Универсальные==================================================================*/
 .h1-blc{
 margin-bottom: 20px;
@@ -66,13 +69,13 @@ margin-bottom: 5px;
 /*Топ*/
 .top-panel {
 background: #f6f6f6;
-border-bottom: 1px solid #ebeaef;
+border-bottom: 1px solid #dadada;
 padding: 10px 0;
 }
 /*Футер*/
 .footer-panel{
   background: #f6f6f6;
-  border-top: 1px solid #ebeaef;
+  border-top: 1px solid #dadada;
   padding: 10px 0;
 }
 /*Панель слева*/

@@ -5,7 +5,7 @@ $data = new Database("warehouses");
 $storage = $data->getAllData();
 
 foreach ($storage as $key => $value) {
-  $points[$key]=array(
+  $points[$key] = array(
     "type" => "Feature",
     "id" => $key,
     "geometry" => array(
@@ -15,6 +15,9 @@ foreach ($storage as $key => $value) {
     "properties" => array(
       "balloonContentBody" => $storage[$key]["name"],
       "hintContent" => $storage[$key]["name"]
+    ),
+    "options" => array(
+      "preset" => "islands#nightFactoryCircleIcon"
     )
   );
 }
