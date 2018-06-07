@@ -55,5 +55,35 @@ for ( $day = 1; $day <= $day_count; $day++, $str++) {
 $data = new Database("warehouses");
 $storage = $data->getDataOrderBy("Asc", "Name");
 
+
+
+
+
+
+
+
+echo date("Y:m:d");
+
+$date =  date("Y:m:d");
+
+$selectData = new Database("expeditions");
+$sql_query = "SELECT * FROM warehouses a, expeditions b WHERE a.id = b.id_warehouses AND date_travel='".$date."' ORDER BY priority ASC " ;
+$expeditions = $selectData->getDataMyQuery($sql_query);
+
+
+/*
+foreach ($expeditions as $key => $value) {
+  //$arr[] = array( $expeditions[$key]["latitude"], $expeditions[$key]["longitude"] );
+
+  $arr[] = ''[]" $expeditions[$key]["latitude"], $expeditions[$key]["longitude"] );
+}*/
+
+
+
+
+
+
+
+
 include $_SERVER['DOCUMENT_ROOT']."/template/footer.php";
 ?>

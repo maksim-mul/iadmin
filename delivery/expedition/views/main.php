@@ -1,5 +1,5 @@
 <div uk-grid class="uk-grid-small">
-  <div class="uk-width-1-4">
+  <div class="uk-width-1-3">
     <div>
       <h3 class="uk-margin-remove">
         <a href="?ym=<?php echo $prev; ?>"><span uk-icon="icon: chevron-left"></span></a>
@@ -23,6 +23,9 @@
           ?>
       </table>
     </div>
+  </div>
+  <div class="uk-width-1-2">
+    <div id="map" style="width: 100%; height: 380px;"></div>
   </div>
 </div>
 
@@ -51,3 +54,95 @@
       </div>
   </div>
 </div>
+
+
+<script src="http://api-maps.yandex.ru/2.1/?lang=ru-RU" type="text/javascript"></script>
+<script src="http://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
+
+<script>
+function init () {
+    /**
+     * Создаем мультимаршрут.
+     * Первым аргументом передаем модель либо объект описания модели.
+     * Вторым аргументом передаем опции отображения мультимаршрута.
+     * @see https://api.yandex.ru/maps/doc/jsapi/2.1/ref/reference/multiRouter.MultiRoute.xml
+     * @see https://api.yandex.ru/maps/doc/jsapi/2.1/ref/reference/multiRouter.MultiRouteModel.xml
+     */
+    var multiRoute = new ymaps.multiRouter.MultiRoute({
+        // Описание опорных точек мультимаршрута.
+        referencePoints: [
+          [54.919500, 37.432390],
+          <?foreach ($expeditions as $key => $value) {?>
+            [<?=$expeditions[$key]["latitude"]?>,<?=$expeditions[$key]["longitude"]?>],<?
+          }?>
+          [54.919500, 37.432390],
+        ],
+        // Параметры маршрутизации.
+        params: {
+            // Ограничение на максимальное количество маршрутов, возвращаемое маршрутизатором.
+            results: 3,
+        }
+    }, {
+        // Автоматически устанавливать границы карты так, чтобы маршрут был виден целиком.
+        boundsAutoApply: true
+    });
+
+    // Создаем кнопки для управления мультимаршрутом.
+    var trafficButton = new ymaps.control.Button({
+            data: { content: "Учитывать пробки" },
+            options: { selectOnClick: true }
+        });
+
+    // Объявляем обработчики для кнопок.
+    trafficButton.events.add('select', function () {
+        /**
+         * Задаем параметры маршрутизации для модели мультимаршрута.
+         * @see https://api.yandex.ru/maps/doc/jsapi/2.1/ref/reference/multiRouter.MultiRouteModel.xml#setParams
+         */
+        multiRoute.model.setParams({ avoidTrafficJams: true }, true);
+    });
+
+    trafficButton.events.add('deselect', function () {
+        multiRoute.model.setParams({ avoidTrafficJams: false }, true);
+    });
+
+
+
+
+
+
+    multiRoute.model.events.once("requestsuccess", function () {
+        var yandexWayPoint = multiRoute.getWayPoints().get(0);
+        yandexWayPoint.options.set({
+            preset: "islands#grayStretchyIcon",
+            iconContentLayout: ymaps.templateLayoutFactory.createClass(
+                '<span style="color: red;">В</span>езем отсюда'
+            ),
+            balloonContentLayout: ymaps.templateLayoutFactory.createClass(
+                '{{ properties.address|raw }}'
+            )
+        });
+    });
+
+
+
+
+
+
+
+
+
+    // Создаем карту с добавленными на нее кнопками.
+    var myMap = new ymaps.Map('map', {
+        center: [55.750625, 37.626],
+        zoom: 7,
+        controls: [trafficButton]
+    }, {
+        buttonMaxWidth: 300
+    });
+
+    // Добавляем мультимаршрут на карту.
+    myMap.geoObjects.add(multiRoute);
+}
+ymaps.ready(init);
+</script>
