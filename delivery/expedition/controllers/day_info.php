@@ -46,4 +46,10 @@ if( !empty( $expeditions ) ){
 else{
   echo 'На этот день поездка не планируется.';
 }
+$test ="111";
 ?>
+
+<script>
+$("#map").empty();
+init();
+</script>

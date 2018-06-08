@@ -47,6 +47,9 @@
 
   <div class="uk-width-1-2">
       <h3>Список точек</h3>
+
+      <div class="uk-button uk-button-default uk-button-large uk-width-1-1 uk-margin-bottom" id="btn-save">Сохранить</div>
+
       <div uk-sortable="group: sortable-group" id="content">
           <div class="uk-margin-small">
 
@@ -60,7 +63,7 @@
 <script src="http://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
 
 <script>
-function init () {
+function init (){
     /**
      * Создаем мультимаршрут.
      * Первым аргументом передаем модель либо объект описания модели.
@@ -106,32 +109,21 @@ function init () {
         multiRoute.model.setParams({ avoidTrafficJams: false }, true);
     });
 
-
-
-
-
-
     multiRoute.model.events.once("requestsuccess", function () {
-        var yandexWayPoint = multiRoute.getWayPoints().get(0);
-        yandexWayPoint.options.set({
-            preset: "islands#grayStretchyIcon",
-            iconContentLayout: ymaps.templateLayoutFactory.createClass(
-                '<span style="color: red;">В</span>езем отсюда'
-            ),
-            balloonContentLayout: ymaps.templateLayoutFactory.createClass(
-                '{{ properties.address|raw }}'
-            )
-        });
+
+        <?foreach ($expeditions as $key => $value) {?>
+          var yandexWayPoint = multiRoute.getWayPoints().get(<?=$key+1?>);
+          yandexWayPoint.options.set({
+              preset: "islands#nightStretchyIcon",
+              iconContentLayout: ymaps.templateLayoutFactory.createClass(
+                  <?=$key+1?>+" <?=$value['name']?>"
+              ),
+              balloonContentLayout: ymaps.templateLayoutFactory.createClass(
+                  '{{ properties.address|raw }}'
+              )
+          });
+        <?}?>
     });
-
-
-
-
-
-
-
-
-
     // Создаем карту с добавленными на нее кнопками.
     var myMap = new ymaps.Map('map', {
         center: [55.750625, 37.626],

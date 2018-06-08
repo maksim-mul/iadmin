@@ -31,7 +31,7 @@ text-decoration: underline;
 /*Таблица*/
 th {
     height: 30px;
-    text-align: center;
+    text-align: center !important;
     font-weight: 700;
 }
 td {
@@ -40,7 +40,7 @@ td {
 th:nth-of-type(7),td:nth-of-type(7),th:nth-of-type(6),td:nth-of-type(6)  {
     color: red;
 }
-th:nth-of-type(7),td:nth-of-type(7),th:nth-of-type(1),td:nth-of-type(1)  {
+th:nth-of-type(7),td:nth-of-type(7),th:nth-of-type(6),td:nth-of-type(6)  {
     background: #efefef;
 }
 .today {

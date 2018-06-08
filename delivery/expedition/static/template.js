@@ -1,7 +1,6 @@
 ﻿/*Удаление пунктов доставки*/
 $('body').on('click', '.card-stock-delit', function(e) {
   id_exp = $(this).attr("id-exp");
-
   $.ajax({
     type: "POST",
     url: "/delivery/expedition/controllers/day_delit.php",
@@ -10,9 +9,6 @@ $('body').on('click', '.card-stock-delit', function(e) {
       },
       success: sucEdit
   });
-
-
-
   $(this).closest('.card-stock').remove();
 });
 
@@ -45,35 +41,37 @@ $(document).ready(function(){
       success: sucPull
   });
 
+  $('#btn-save').click(function(e) {
+    //Отправка в БД
+    var i=0;
+
+    $('#content>div').each(function(){
+      i++;
+      id = $(this).attr('id_exp');
+      id_warehouses = $(this).attr('storage-id');
+      comment = $(this).find("textarea").val();
+      sum = $(this).find("input").val();
+      oplata = $(this).find("select").val();
+
+      $.ajax({
+        type: "POST",
+        url: "/delivery/expedition/controllers/day_edit.php",
+        data: {
+          id: id,
+          id_warehouses: id_warehouses,
+          day: day,
+          comment: comment,
+          oplata: oplata,
+          sum: sum,
+          priority: i
+        },
+        success: sucEdit
+      });
+    });
+    //ymaps.ready(init);
+  });
+
   $('.tab-calendar td').click(function(e) {
-      //Отправка в БД
-      var i=0;
-
-    	$('#content>div').each(function(){
-        i++;
-        id = $(this).attr('id_exp');
-        id_warehouses = $(this).attr('storage-id');
-        comment = $(this).find("textarea").val();
-        sum = $(this).find("input").val();
-        oplata = $(this).find("select").val();
-
-        $.ajax({
-          type: "POST",
-          url: "/delivery/expedition/controllers/day_edit.php",
-          data: {
-            id: id,
-            id_warehouses: id_warehouses,
-            day: day,
-            comment: comment,
-            oplata: oplata,
-            sum: sum,
-            priority: i
-          },
-          success: sucEdit
-        });
-    	});
-
-
       //Получение информации из БД
       day = $(this).attr("day");
       $('.tab-calendar .active').removeClass('active');
@@ -93,6 +91,8 @@ $(document).ready(function(){
 function sucPull(data){
   if(data){
     $("#content").html(data);
+    $("#map").empty();
+    init();
   }
   else{
     alert("Произошла ошибка");
@@ -101,7 +101,7 @@ function sucPull(data){
 
 function sucEdit(data){
   if(data){
-    //alert(data);
+    //alert("Маршрут обновлен.");
   }
   else{
     alert("Произошла ошибка");
