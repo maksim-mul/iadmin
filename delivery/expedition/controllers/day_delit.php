@@ -1,7 +1,13 @@
 <?
 include_once $_SERVER['DOCUMENT_ROOT']."/core/bootstrap.php";
-  $id =  htmlspecialchars( trim( $_POST['id_exp'] ) );
-  $delData = new Database("expeditions");
-  $delData->deleteRow($id);
+  $delit = $_POST['delit'];
+
+  if( !empty($delit) ){
+    foreach ($delit as $key => $value) {
+      $delData = new Database("expeditions");
+      $delData->deleteRow($value);
+    }
+  }
+  
   echo "1";
 ?>

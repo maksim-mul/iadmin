@@ -10,9 +10,9 @@ $expeditions = $selectData->getDataMyQuery($sql_query);
 if( !empty( $expeditions ) ){
   foreach ($expeditions as $value) {
   ?>
-    <div class="uk-card uk-card-default card-stock" storage-id="<?=$value['id_warehouses']?>" id_exp="<?=$value['id']?>">
+    <div class="uk-card uk-card-default card-stock" storage-name="<?=$value['name']?>" storage-id="<?=$value['id_warehouses']?>" id_exp="<?=$value['id']?>" storage-latitude="<?=$value['latitude']?>" storage-longitude="<?=$value['longitude']?>">
         <div class="card-stock-title">
-            <a style="color: #df405a;" href="https://yandex.ru/maps/213/moscow/?mode=search&text=<?=$value['latitude']?>%2C<?=$value['longitude']?>&sll=37.489376%2C54.902805" target="_blank"><span uk-icon="icon: location; ratio: 1.3"></span></a>
+            <a style="color: #df405a;" href="/delivery/storage/?lat=<?=$value['latitude']?>&long=<?=$value['longitude']?>" target="_blank"><span uk-icon="icon: location; ratio: 1.3"></span></a>
             <span><?=$value["name"]?></span>
             <div class="uk-float-right">
                 <span uk-icon="icon: clock;"></span>
@@ -46,10 +46,4 @@ if( !empty( $expeditions ) ){
 else{
   echo 'На этот день поездка не планируется.';
 }
-$test ="111";
 ?>
-
-<script>
-$("#map").empty();
-init();
-</script>

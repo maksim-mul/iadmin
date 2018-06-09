@@ -14,7 +14,6 @@ include_once $_SERVER['DOCUMENT_ROOT']."/core/bootstrap.php";
   }
   else{
     $data["date_travel"] =  htmlspecialchars( trim( $_POST['day'] ) );
-
     $insertData = new Database("expeditions");
     $insertData->insertRow($data);
     echo '2';

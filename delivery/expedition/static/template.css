@@ -45,6 +45,17 @@ th:nth-of-type(7),td:nth-of-type(7),th:nth-of-type(6),td:nth-of-type(6)  {
 }
 .today {
   background: #fff;
+  position: relative;
+}
+.today:before{
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  content: " ";
+  background: #df405a;
+  top: 5px;
+  right: 5px;
+  border-radius: 50%;
 }
 .tab-calendar .active{
   background: #545486;
