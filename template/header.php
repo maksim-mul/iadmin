@@ -5,6 +5,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/core/bootstrap.php";
 <head>
     <title><?=$SetTitle?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <?
     //Подключаем стили и js по умолчанию
 		add_default_css_js();

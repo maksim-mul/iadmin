@@ -32,16 +32,47 @@
 <div class="uk-grid" class="uk-grid-small">
   <div class="uk-width-1-3">
       <h3>Список складов</h3>
+
+      <div class="uk-margin">
+          <input id="stor_name" class="uk-input" type="text" placeholder="Название склада">
+      </div>
+
       <ul class="uk-list uk-list-striped  uk-panel-scrollable uk-resize-vertical" id="storage-list" style="height: 700px; border: 1px solid #e2e2e2; padding: 0px;">
-        <? foreach ($storage as &$value) { ?>
-          <li>
-              <?=$value['name']?>
-              <div class="uk-float-right">
-                <a id_storage="<?=$value['id']?>" time_open="<?=date("H:i", strtotime($value['time_opening']))?>" time_close="<?=date("H:i", strtotime($value['time_closing']))?>" latitude="<?=$value['latitude']?>" longitude="<?=$value['longitude']?>" name="<?=$value['name']?>" class="btn-delit list-add-stock">Добавить</a>
-                <a class="" style="color: #2f008a;" href="/delivery/storage/?lat=<?=$value['latitude']?>&long=<?=$value['longitude']?>" target="_blank"><span uk-icon="icon: location; ratio: 1"></span></a>
-              </div>
-          </li>
-        <? } ?>
+
+
+
+        <?
+        $letter = "";
+        foreach ($storage as &$value) {
+          $first_l = mb_substr( $value["name"],0,1,"UTF-8");
+          if( $first_l == $letter ){
+            ?>
+            <li>
+                <?=$value['name']?>
+                <div class="uk-float-right">
+                  <a id_storage="<?=$value['id']?>" time_open="<?=date("H:i", strtotime($value['time_opening']))?>" time_close="<?=date("H:i", strtotime($value['time_closing']))?>" latitude="<?=$value['latitude']?>" longitude="<?=$value['longitude']?>" name="<?=$value['name']?>" class="btn-delit list-add-stock">Добавить</a>
+                  <a class="" style="color: #2f008a;" href="/delivery/storage/?lat=<?=$value['latitude']?>&long=<?=$value['longitude']?>" target="_blank"><span uk-icon="icon: location; ratio: 1"></span></a>
+                </div>
+            </li>
+            <?
+          }
+          else{
+            $letter = $first_l;
+            ?>
+            <li>
+                <div style="font-size: 20px; line-height: 30px; color: #df405a; font-weight: 600;"><?=$letter?></div>
+            </li>
+            <li>
+                <?=$value['name']?>
+                <div class="uk-float-right">
+                  <a id_storage="<?=$value['id']?>" time_open="<?=date("H:i", strtotime($value['time_opening']))?>" time_close="<?=date("H:i", strtotime($value['time_closing']))?>" latitude="<?=$value['latitude']?>" longitude="<?=$value['longitude']?>" name="<?=$value['name']?>" class="btn-delit list-add-stock">Добавить</a>
+                  <a class="" style="color: #2f008a;" href="/delivery/storage/?lat=<?=$value['latitude']?>&long=<?=$value['longitude']?>" target="_blank"><span uk-icon="icon: location; ratio: 1"></span></a>
+                </div>
+            </li>
+            <?
+          }
+        }
+        ?>
       </ul>
   </div>
 

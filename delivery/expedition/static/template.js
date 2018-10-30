@@ -181,7 +181,7 @@ function sucPull(data){
       point.push(loc);
       point_name.push(name);
     });
-    
+
     point.push(start);
     point_name.push("База")
     $("#map").empty();
@@ -200,3 +200,20 @@ function sucEdit(data){
     alert("Произошла ошибка");
   }
 };
+
+
+
+//Поиск склада=====================
+$('#stor_name').on('input keyup', function(e) {
+alert("11");
+/*
+  var stor_name = $('#stor_name').val();
+	$.ajax({
+		type: "POST",
+		url: "/admin/ajax/users.php",
+		data: {
+			phone: phone,
+		},
+		success: getUsers
+	});*/
+});
