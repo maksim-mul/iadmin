@@ -205,15 +205,19 @@ function sucEdit(data){
 
 //Поиск склада=====================
 $('#stor_name').on('input keyup', function(e) {
-alert("11");
-/*
   var stor_name = $('#stor_name').val();
 	$.ajax({
 		type: "POST",
-		url: "/admin/ajax/users.php",
+		url: "/delivery/expedition/controllers/ajax/search_stor.php",
 		data: {
-			phone: phone,
+			stor_name: stor_name,
 		},
-		success: getUsers
-	});*/
+		success: sucStor
+	});
+
+  function sucStor(data){
+    //alert(data);
+    $("#storage-list").html(data);
+  }
+
 });

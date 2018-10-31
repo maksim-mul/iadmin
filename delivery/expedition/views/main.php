@@ -45,32 +45,23 @@
         $letter = "";
         foreach ($storage as &$value) {
           $first_l = mb_substr( $value["name"],0,1,"UTF-8");
-          if( $first_l == $letter ){
-            ?>
-            <li>
-                <?=$value['name']?>
-                <div class="uk-float-right">
-                  <a id_storage="<?=$value['id']?>" time_open="<?=date("H:i", strtotime($value['time_opening']))?>" time_close="<?=date("H:i", strtotime($value['time_closing']))?>" latitude="<?=$value['latitude']?>" longitude="<?=$value['longitude']?>" name="<?=$value['name']?>" class="btn-delit list-add-stock">Добавить</a>
-                  <a class="" style="color: #2f008a;" href="/delivery/storage/?lat=<?=$value['latitude']?>&long=<?=$value['longitude']?>" target="_blank"><span uk-icon="icon: location; ratio: 1"></span></a>
-                </div>
-            </li>
-            <?
-          }
-          else{
+          if( $first_l != $letter ){
             $letter = $first_l;
             ?>
             <li>
                 <div style="font-size: 20px; line-height: 30px; color: #df405a; font-weight: 600;"><?=$letter?></div>
             </li>
-            <li>
-                <?=$value['name']?>
-                <div class="uk-float-right">
-                  <a id_storage="<?=$value['id']?>" time_open="<?=date("H:i", strtotime($value['time_opening']))?>" time_close="<?=date("H:i", strtotime($value['time_closing']))?>" latitude="<?=$value['latitude']?>" longitude="<?=$value['longitude']?>" name="<?=$value['name']?>" class="btn-delit list-add-stock">Добавить</a>
-                  <a class="" style="color: #2f008a;" href="/delivery/storage/?lat=<?=$value['latitude']?>&long=<?=$value['longitude']?>" target="_blank"><span uk-icon="icon: location; ratio: 1"></span></a>
-                </div>
-            </li>
             <?
           }
+          ?>
+          <li>
+              <?=$value['name']?>
+              <div class="uk-float-right">
+                <a id_storage="<?=$value['id']?>" time_open="<?=date("H:i", strtotime($value['time_opening']))?>" time_close="<?=date("H:i", strtotime($value['time_closing']))?>" latitude="<?=$value['latitude']?>" longitude="<?=$value['longitude']?>" name="<?=$value['name']?>" class="btn-delit list-add-stock">Добавить</a>
+                <a class="" style="color: #2f008a;" href="/delivery/storage/?lat=<?=$value['latitude']?>&long=<?=$value['longitude']?>" target="_blank"><span uk-icon="icon: location; ratio: 1"></span></a>
+              </div>
+          </li>
+          <?
         }
         ?>
       </ul>
