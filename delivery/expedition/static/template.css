@@ -28,6 +28,10 @@ color: #df405a;
 text-decoration: underline;
 }
 
+svg {
+    max-width: initial;
+}
+
 /*Таблица*/
 th {
     height: 30px;

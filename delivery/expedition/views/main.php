@@ -69,7 +69,7 @@
 
   <div class="uk-width-1-2">
       <h3>Список точек</h3>
-      <div class="uk-button uk-button-primary uk-button-large uk-margin-bottom" id="btn-save">Сохранить изменения <span uk-icon="server"></span></div>
+      <div class="uk-button uk-button-primary uk-button-large uk-margin-bottom" id="btn-save">Сохранить изменения <span uk-icon="bookmark"></span></div>
       <div uk-sortable="group: sortable-group" id="content">
           <div class="uk-margin-small">
           </div>

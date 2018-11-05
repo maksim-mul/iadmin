@@ -206,6 +206,8 @@ function sucEdit(data){
 //Поиск склада=====================
 $('#stor_name').on('input keyup', function(e) {
   var stor_name = $('#stor_name').val();
+  $("#storage-list").html('<div class="uk-text-center uk-margin-top"><div uk-spinner="ratio: 2"></div></div>');
+
 	$.ajax({
 		type: "POST",
 		url: "/delivery/expedition/controllers/ajax/search_stor.php",
